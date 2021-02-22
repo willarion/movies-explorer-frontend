@@ -1,0 +1,79 @@
+.header {
+  background-color: #5C5C5C;
+  min-height: 74px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 70px;
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.3;
+}
+
+.header__logo {
+  width: 38px;
+  height: 38px;
+}
+
+.header__navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header__navigation-links {
+  margin-right: 50px;
+}
+
+.header__navigation-link:first-of-type {
+  margin-right: 20px;
+}
+
+.header__link {
+  transition: opacity .3s ease-in 0s;
+}
+
+.header__link:focus {
+  outline: none;
+}
+
+.header__link:hover {
+  opacity: .6;
+  cursor: pointer; 
+}
+
+.header__navigation-link {
+  text-decoration: none;
+  color: #fff;
+}
+
+.header__navigation-account {
+  color: #000;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header__navigation-account-icon {
+  margin-left: 13px;
+  height: 30px;
+  width: 30px;
+  background-size: cover;
+  position: relative;
+  background-image: url(../../images/account_icon.svg);
+}
+
+.header__navigation-account-icon::after {
+  content: "";
+  position: absolute;
+  height: 9px;
+  width: 9px;
+  background-size: cover;
+  background-image: url(../../images/account_icon_main.svg);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
