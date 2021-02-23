@@ -68,6 +68,17 @@
   font-size: 14px;
   line-height: 1.57;
   margin-right: 20px;
+  transition: opacity .3s ease-in 0s;
+
+}
+
+.about-me__link:focus {
+  outline: none;
+}
+
+.about-me__link:hover {
+  opacity: .6;
+  cursor: pointer;
 }
 
 .about-me-portrait {
