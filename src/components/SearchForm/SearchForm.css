@@ -19,6 +19,7 @@
 .search-form__illustration {
   background-image: url(../../images/searchicon-black.svg);
   background-position: center;
+  background-repeat: no-repeat;
   height: 34px;
   width: 34px;
 }
@@ -63,6 +64,7 @@
   width: 80px;
   height: 34px;
   background-image: url(../../images/find.svg);
+  background-repeat: no-repeat;
   border: none;
   background-color: transparent;
   transition: opacity .3s ease-in 0s;

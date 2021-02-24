@@ -15,6 +15,7 @@
 .header__logo {
   width: 38px;
   height: 38px;
+  background-repeat: no-repeat;
 }
 
 .header__navigation {
@@ -77,6 +78,7 @@
   width: 30px;
   background-size: cover;
   position: relative;
+  background-repeat: no-repeat;
   background-image: url(../../images/account-icon.svg);
 }
 
@@ -87,6 +89,7 @@
   width: 9px;
   background-size: cover;
   background-image: url(../../images/account-icon-main.svg);
+  background-repeat: no-repeat;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
