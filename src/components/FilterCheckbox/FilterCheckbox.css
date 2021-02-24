@@ -38,6 +38,10 @@
   position: relative;
 }
 
+.filter-checkbox:hover {
+  color: rgba(1, 1, 1, 0.6);
+}
+
 .filter-checkbox__initial-picture {
   position: absolute;
   z-index: -1;
@@ -51,7 +55,11 @@
 }
 
 .filter-checkbox__initial-picture:checked+.filter-checkbox__label{
-  color: rgba(1, 1, 1, 0.6);
+  color: rgba(1, 1, 1, 0.1);
+}
+
+.filter-checkbox:hover .filter-checkbox__initial-picture:checked+.filter-checkbox__label {
+  color: rgba(1, 1, 1, 0.3);
 }
 
 .filter-checkbox__label::before {

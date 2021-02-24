@@ -10,6 +10,10 @@
   box-sizing: border-box;
 }
 
+.movies-card:hover {
+  cursor: pointer;
+}
+
 .movies-card:last-of-type {
   margin-bottom: 60px;
 }
@@ -26,6 +30,11 @@
   line-height: 1.22;
   color: #000000;
   margin: 0 0 13px;
+  transition: opacity .3s ease-in 0s;
+}
+
+.movies-card:hover .movies-card__name {
+  opacity: .6;
 }
 
 .movies-card__duration {
@@ -44,8 +53,7 @@
   background-repeat: no-repeat;
   width: 14px;
   height: 12px;
-  transition: opacity .3s ease-in 0s;
-  transition: background-image .3s ease-in 0s;
+  transition: all .3s ease-in 0s;
   background-color: transparent;
   border: none;
   padding: 0;
@@ -73,4 +81,9 @@
   height: 122px;
   background-position: center;
   background-size: cover;
+  transition: opacity .3s ease-in 0s;
+}
+
+.movies-card:hover .movies-card__image {
+  opacity: .8;
 }
