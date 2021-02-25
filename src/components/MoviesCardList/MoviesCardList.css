@@ -5,6 +5,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
+  min-height: 702px;
 }
 
 .movies-card-list__failed-search {
@@ -40,6 +41,11 @@
   border: none;
   transition: opacity .3s ease-in 0s;
   padding: 0;
+  margin-top: 60px;
+}
+
+.movies-card-list__btn_disabled {
+  display: none;
 }
 
 .movies-card-list__btn:focus {
