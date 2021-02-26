@@ -11,7 +11,7 @@ import Register from '../Register/Register';
 function App() {
   return (
     <>
-      <Header />
+      {/* <Header /> */}
         <Switch>
           <Route exact path="/">
             <Main />
