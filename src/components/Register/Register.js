@@ -16,7 +16,7 @@ function Register(props) {
             />
           </label>
           <label className="register__input-field" for="email">
-            Почта
+            E-mail
             <input type="email" name="email" className="register__input-line" id="input-email" required="" minlength="2" maxlength="20" 
             // value=""
             />
