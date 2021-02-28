@@ -56,3 +56,19 @@
   opacity: .6;
   cursor: pointer; 
 }
+
+@media screen and (max-width: 500px) {
+
+  .movies-card-list {
+    padding: 40px 10px ;
+  }
+
+  .movies-card-list__list {
+    display: grid;
+    row-gap: 20px;
+  }
+
+  .movies-card-list__btn {
+    margin: 70px auto 89px;
+  }
+}

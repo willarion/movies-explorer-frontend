@@ -170,7 +170,7 @@
     position: absolute;
     right: 0;
     top: 0;
-    z-index: 2;
+    z-index: -1;
     align-items: center;
     flex-direction: column-reverse;
     box-sizing: border-box;
@@ -181,6 +181,7 @@
 
   .navigation_visible {
     opacity: 1;
+    z-index: 2;
   }
 
   .navigation__burger {
