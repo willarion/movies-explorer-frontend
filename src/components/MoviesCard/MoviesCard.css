@@ -87,3 +87,10 @@
 .movies-card:hover .movies-card__image {
   opacity: .8;
 }
+
+
+@media screen and (max-width: 500px) {
+  .movies-card {
+    flex-direction: column-reverse;
+  }
+}
