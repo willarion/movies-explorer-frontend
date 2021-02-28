@@ -4,6 +4,7 @@ import SearchForm from '../SearchForm/SearchForm'
 
 function SavedMovies (props) {
   const disabledBtn = "movies-card-list__btn_disabled";
+  const deleteFilmBtn = "movies-card__btn_state_delete"
 
   const cards = [ // temporary data 
     {
@@ -29,7 +30,7 @@ function SavedMovies (props) {
   return (
     <main>
       <SearchForm />
-      <MoviesCardList cards={cards} disabledBtn={disabledBtn} />
+      <MoviesCardList cards={cards} disabledBtn={disabledBtn} deleteFilmBtn={deleteFilmBtn} />
     </main>
   )
 }

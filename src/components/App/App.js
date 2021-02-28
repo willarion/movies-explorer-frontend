@@ -11,9 +11,17 @@ import Login from '../Login/Login';
 import NotFound from '../NotFound/NotFound';
 
 function App() {
+
+  const [visible, setVisibility] = React.useState(false);
+
+  function toggleClass() {
+    const currentVisibility = visible;
+    setVisibility(!currentVisibility);
+  }
+
   return (
     <>
-      <Header />
+      <Header toggleClass={toggleClass} visible={visible} />
         <Switch>
           <Route exact path="/">
             <Main />
@@ -22,7 +30,7 @@ function App() {
             <Movies />
           </Route>
           <Route path="/saved-movies">
-            <SavedMovies />
+            <SavedMovies class={'movies-card__btn_state_delete'} />
           </Route>
           <Route path="/profile">
             <Profile />

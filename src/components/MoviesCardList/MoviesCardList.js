@@ -12,10 +12,10 @@ function MoviesCardList (props) {
       </p>
       <ul className="movies-card-list__list">
         {props.cards.map((card) => (
-          <MoviesCard card={card} key={card._id} />
+          <MoviesCard deleteFilmBtn={props.deleteFilmBtn} card={card} key={card._id} />
         ))}
       </ul>
-      <button className={`movies-card-list__btn ${ props.disabledBtn }`} type="button">Ещё</button>
+      <button className={`movies-card-list__btn ${ props.disabledBtn } `} type="button">Ещё</button>
     </section>
   )
 }

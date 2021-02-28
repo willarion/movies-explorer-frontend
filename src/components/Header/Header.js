@@ -6,7 +6,7 @@ function Header (props) {
   return (
     <header className="header">
       <div style={{ backgroundImage: `url(${headerLogo})` }} className="header__logo" />
-     <Navigation />
+     <Navigation toggleClass={props.toggleClass} visible={props.visible} />
     </header>
   )
 }
