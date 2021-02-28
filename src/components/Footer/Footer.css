@@ -55,3 +55,38 @@
 .footer__navigation-link:last-of-type {
   margin-right: 0;
 }
+
+@media screen and (max-width: 500px) {
+
+  .footer {
+    padding: 79px 10px 10px;
+  }
+
+  .footer__info {
+    font-size: 12px;
+    line-height: 1.25;
+  }
+
+  .footer__navigation {
+    flex-direction: column-reverse;
+    align-items: center;
+    padding-top: 30px;
+  }
+
+  .footer__navigation-links {
+    display: grid;
+    row-gap: 12px;
+    font-size: 12px;
+    line-height: 1.25;
+    margin-bottom: 30px;
+  }
+
+  .footer__navigation-link{
+    margin: 0;
+    text-align: center;
+  }
+
+  .movies-card-list__btn {
+    margin: 70px auto 89px;
+  }
+}
