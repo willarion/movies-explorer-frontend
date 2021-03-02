@@ -11,15 +11,18 @@ function AboutProject(props) {
   
           <p className="about-project__timing-header about-project__header">На выполнение диплома ушло 5 недель</p>
           <p div className="about-project__timing-info about-project__info">У каждого этапа был мягкий и жёсткий дедлайн, которые нужно было соблюдать, чтобы успешно защититься.</p>
-          <div className="about-project__timeline-back">
-            <p className="about-project__timeline-text about-project__timeline-heading">1 неделя</p>
-            <p className="about-project__timeline-text about-project__timeline-subheading">Back-end</p>
+        </div>
+          <div className="about-project__timeline-container"> 
+            <div className="about-project__timeline-back">
+              <p className="about-project__timeline-text about-project__timeline-heading">1 неделя</p>
+              <p className="about-project__timeline-text about-project__timeline-subheading">Back-end</p>
+            </div>
+            <div className="about-project__timeline-front">
+              <p className="about-project__timeline-text about-project__timeline-heading">4 недели</p>
+              <p className="about-project__timeline-text about-project__timeline-subheading">Front-end</p>
+            </div>
           </div>
-          <div className="about-project__timeline-front">
-            <p className="about-project__timeline-text about-project__timeline-heading">4 недели</p>
-            <p className="about-project__timeline-text about-project__timeline-subheading">Front-end</p>
-          </div>
-      </div>
+      
     </section>
   )
 }

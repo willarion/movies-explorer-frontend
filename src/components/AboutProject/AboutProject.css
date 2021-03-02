@@ -20,8 +20,7 @@
   column-gap: 40px;
   grid-template-areas:
     "stages__header timing__header"
-    "info__stages info__timing"
-    "timeline__back timeline__front"
+    "info__stages info__timing";
 }
 
 .about-project__header {
@@ -57,6 +56,12 @@
 
 .about-project__timing-info {
   grid-area: info__timing;
+}
+
+.about-project__timeline-container {
+  display: grid;
+  grid-template-areas:
+    "timeline__back timeline__front";
 }
 
 .about-project__timeline-back {
@@ -108,4 +113,67 @@
 
 .about-project__timeline-text:first-of-type {
   margin-bottom: 23px;
+}
+
+
+@media screen and (max-width: 800px) {
+  .about-project {
+    padding: 90px 50px;
+  }
+
+  .about-project__info {
+    font-size: 12px;
+    line-height: 1.5;
+  }
+
+  .about-project__timeline-text {
+    text-align: start;
+    margin-left: 40px;
+  }
+
+  .about-project__timeline-front::before {
+    width: 157%;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .about-project {
+    padding: 70px 18px
+  }
+
+  .about-project__container {
+    display: block;
+    margin-bottom: 60px;
+  }
+
+  .about-project__header {
+    margin-bottom: 16px;
+    font-size: 18px;
+  }
+
+  .about-project__info {
+    margin-bottom: 56px;
+    font-size: 11px;
+  }
+
+  .about-project__timeline-text {
+    font-size: 11px;
+    width: auto;
+    margin-left: 25px;
+  }
+
+  .about-project__timeline-text:first-of-type {
+    padding: 11px 0;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+  }
+
+  .about-project__timeline-front::before {
+    width: 130%;
+  }
+
+  .about-project__timeline-front::before, .about-project__timeline-back::before  {
+    top: 0;
+  }
+
 }
