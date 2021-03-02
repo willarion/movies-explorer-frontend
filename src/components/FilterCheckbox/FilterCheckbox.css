@@ -52,6 +52,8 @@
   user-select: none;
   cursor: pointer;
   transition: color .3s ease-in 0s;
+  font-size: 14px;
+  line-height: 1.28;
 }
 
 .filter-checkbox__initial-picture:checked+.filter-checkbox__label{
@@ -96,4 +98,11 @@
   left: -30px;
   top: 2px;
   animation: checked .3s ease-out 0s 1 normal forwards;
+}
+
+@media screen and (max-width: 600px) {
+  .filter-checkbox__label {
+    font-size: 11px;
+    line-height: 1.63;
+  }
 }

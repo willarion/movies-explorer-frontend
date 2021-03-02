@@ -57,10 +57,15 @@
   cursor: pointer; 
 }
 
-@media screen and (max-width: 500px) {
-
+@media screen and (max-width: 768px) {
   .movies-card-list {
-    padding: 40px 10px ;
+    padding: 60px 30px 80px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .movies-card-list {
+    padding: 40px 10px 80px;
   }
 
   .movies-card-list__list {
@@ -69,6 +74,6 @@
   }
 
   .movies-card-list__btn {
-    margin: 70px auto 89px;
+    margin: 70px auto 0;
   }
 }
