@@ -5,6 +5,7 @@
   background-color: #5C5C5C;
   min-height: 560px;
   padding: 50px 70px 60px;
+  box-sizing: border-box;
 }
 
 .promo__heading {
@@ -25,4 +26,35 @@
   height: 244px; 
   opacity: .7;
   align-self: flex-end;
+}
+
+@media screen and (max-width: 768px) {
+  .promo {
+    padding: 300px 44px 70px;
+    align-items: center;
+    height: 844px;
+  }
+
+  .promo__heading {
+    text-align: center;
+  }
+
+  .promo__decoration {
+    align-self: center;
+    width: 680px;
+    height: 230px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .promo {
+    padding: 183px 10px 40px;
+    overflow: hidden;
+    height: 630px;
+  }
+
+  .promo__heading {
+    font-size: 31px;
+    line-height: 1.26;
+  }
 }
