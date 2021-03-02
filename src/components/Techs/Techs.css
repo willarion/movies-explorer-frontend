@@ -51,9 +51,7 @@
 
 .techs__list {
   padding: 0;
-  display: grid;
-  grid-template-columns: repeat(7, 90px);
-  column-gap: 10px;
+  display: flex;
   margin: 0;
 }
 
@@ -77,4 +75,70 @@
 
 .techs__list-item:last-of-type {
   margin-right: 0;
+}
+
+@media screen and (max-width: 768px) {
+  .techs {
+    padding: 90px 50px;
+    box-sizing: border-box;
+    height: 567px;
+  }
+
+  .techs__text {
+    width: auto;
+  }
+
+  .techs__heading {
+    margin-bottom: 80px;
+  }
+
+  .techs__text-heading {
+    margin-bottom: 22px;
+  }
+
+  .techs__text-subheading {
+    font-size: 12px;
+    line-height: 1.5;
+    margin-bottom: 83px;
+    width: auto;
+  }
+
+  .techs__list-item {
+    font-size: 12px;
+    line-height: 1.25;
+    width: 84px;
+    height: 57px;
+    padding: 21px 16px;
+  }
+
+}
+
+@media screen and (max-width: 600px) {
+  .techs {
+    padding: 70px 18px;
+  }
+
+  .techs__heading {
+    font-size: 18px;
+  }
+
+  .techs__text-heading {
+    font-size: 30px;
+  }
+
+  .techs__text-subheading {
+    font-size: 11px;
+    line-height: 1.45;
+  }
+
+  .techs__list {
+    width: 178px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  .techs__list-item {
+    margin: 0 0 10px 0;
+  }
+  
 }
