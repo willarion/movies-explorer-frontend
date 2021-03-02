@@ -111,6 +111,7 @@
     font-size: 12px;
     line-height: 1.5;
     margin: 0 49px 87px 0;
+    width: auto;
   }
 
   .about-me-portrait {
@@ -123,7 +124,7 @@
 @media screen and (max-width: 600px) {
   .about-me {
     padding: 70px 14px;
-    height: 904px;
+    height: fit-content;
     justify-content: start;
   }
 
