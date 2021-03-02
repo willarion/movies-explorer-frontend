@@ -6,7 +6,7 @@ function Register(props) {
   return (
     <main className="register">
       <div style={{ backgroundImage: `url(${registerLogo})` }} className="register__logo" />
-      <p className="register__greeting">Привет, Виталий{props.name}!</p>
+      <p className="register__greeting">Добро пожаловать!</p>
       <form className="register__form">
         <fieldset className="register__form-fields">
           <label className="register__input-field" for="name">
