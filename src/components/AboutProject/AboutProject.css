@@ -141,6 +141,10 @@
     padding: 70px 18px
   }
 
+  .about-project__heading {
+    font-size: 18px;
+  }
+
   .about-project__container {
     display: block;
     margin-bottom: 60px;
