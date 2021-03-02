@@ -95,3 +95,17 @@
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
+@media screen and (max-width: 768px) {
+  .header {
+    padding: 18px 30px;
+    min-height: 0;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .header {
+    padding: 18px 14px;
+  }
+}
+
