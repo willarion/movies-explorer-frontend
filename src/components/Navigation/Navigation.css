@@ -16,6 +16,11 @@
 .navigation__link-item {
   margin-right: 20px;
 }
+
+.navigation__link-item:first-of-type {
+  display: none;
+}
+
 .navigation__link-item:last-of-type {
   margin: 0;
 }
@@ -26,8 +31,8 @@
   transition: opacity .3s ease-in 0s;
 }
 
-.navigation__link_disabled {
-  display: none;
+.navigation__link_current {
+  border-bottom: 2px solid #000;
 }
 
 .navigation__link:focus {
@@ -46,6 +51,10 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+.navigation__link_invisible {
+  display: none;
 }
 
 .navigation__button {
@@ -100,6 +109,7 @@
   height: 24px;
   transition: opacity .3s ease-in 0s;
   display: none;
+  margin: 10px 8px;
 }
 
 .navigation__burger:hover {
@@ -163,7 +173,7 @@
 }
 
 @media screen and (max-width: 768px) {
-  .navigation {
+  .navigation_sided {
     background-color: #fff;
     height: 100vh;
     width: 68vw;
@@ -184,16 +194,16 @@
     z-index: 2;
   }
 
-  .navigation__burger {
+  .navigation__burger_visible {
     display: block;
     align-self: flex-end;
     position: absolute;
-    top: 22.5px;
-    right: 22.5px;
+    right: 15px;
+    top: 15px;
     z-index: 3;
   }
 
-  .navigation__links {
+  .navigation__links_sided {
     flex-direction: column;
     display: grid;
     grid-template-rows: repeat(3, 22px);
@@ -203,21 +213,27 @@
     justify-items: center;
   }
 
-  .navigation__link {
+  .navigation__link_sided {
     color: #000;
     font-size: 18px;
     line-height: 1.22;
+    font-style: normal;
+    font-weight: 500;
+    margin: 0;
   }
 
-  .navigation__account {
+  .navigation__link-item_sided {
     margin: 0;
   }
 }
 
 @media screen and (max-width: 375px) {
-  .navigation {
-    background-color: #fff;
+  .navigation_sided {
     height: 100vh;
     width: 100vw;
+  }
+
+  .navigation__link-item:first-of-type {
+    display: block;
   }
 }
