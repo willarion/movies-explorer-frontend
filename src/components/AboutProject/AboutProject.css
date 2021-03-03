@@ -60,19 +60,19 @@
 
 .about-project__timeline-container {
   display: grid;
+  position: relative;
   grid-template-areas:
     "timeline__back timeline__front";
 }
 
 .about-project__timeline-back {
   grid-area: timeline__back;
-  position: relative;
 }
 
 .about-project__timeline-back::before {
   content: "";
   background-color: #2BE080;
-  width: 100%;
+  width: 25%;
   height: 36px;
   position: absolute;
   top: -8px;
@@ -80,7 +80,6 @@
 
 .about-project__timeline-heading {
   z-index: 1;
-  position: relative;
 }
 
 .about-project__timeline-subheading {
@@ -89,13 +88,12 @@
 
 .about-project__timeline-front {
   grid-area: timeline__front;
-  position: relative;
 }
 
 .about-project__timeline-front::before {
   content: "";
   background-color: #F2F2F2;
-  width: 168%;
+  width: 75%;
   height: 36px;
   position: absolute;
   top: -8px;
@@ -129,10 +127,6 @@
   .about-project__timeline-text {
     text-align: start;
     margin-left: 40px;
-  }
-
-  .about-project__timeline-front::before {
-    width: 157%;
   }
 }
 
@@ -172,12 +166,17 @@
     margin-bottom: 10px;
   }
 
-  .about-project__timeline-front::before {
-    width: 130%;
-  }
-
   .about-project__timeline-front::before, .about-project__timeline-back::before  {
     top: 0;
   }
-
 }
+@media screen and (max-width: 400px) {
+  .about-project__timeline-back::before {
+    width: 40%; 
+  }
+  
+  .about-project__timeline-front::before {
+    width: 65%; 
+  }
+}
+
