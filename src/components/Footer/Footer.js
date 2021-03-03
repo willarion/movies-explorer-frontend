@@ -1,9 +1,18 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-function Footer() {
+function Footer(props) {
+  const [footerStyle, setfooterStyle] = React.useState('');
+
+  React.useEffect(() => {
+    if (props.footerVisibility) {
+      setfooterStyle(props.footerVisibility);
+    }
+    return;
+  });
+
   return (
-    <footer className="footer">
+    <footer className={`footer ${footerStyle}`}>
       <p className="footer__info">Учебный проект Яндекс.Практикум х BeatFilm</p>
       <div className="footer__navigation">
         <p className="footer__copyright">&#169; 2020</p>

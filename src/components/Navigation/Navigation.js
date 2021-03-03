@@ -22,10 +22,10 @@ function Navigation (props) {
     <>
       <div className={loggedIn ? "navigation__burger navigation__burger_visible" : "navigation__burger"} onClick={props.toggleClass}>
         <label for="burger" 
-        className={props.visible ? "navigation__burger-main-line navigation__burger-main-line_checked" : "navigation__burger-main-line"} 
+        className={props.visibleNavigation ? "navigation__burger-main-line navigation__burger-main-line_checked" : "navigation__burger-main-line"} 
         />
       </div>
-      <nav className={ loggedIn ? (props.visible ? "navigation_sided navigation_visible navigation" : "navigation_sided navigation") : "navigation" }>
+      <nav className={ loggedIn ? (props.visibleNavigation ? "navigation_sided navigation_visible navigation" : "navigation_sided navigation") : "navigation" }>
         <Link 
           // to={props.urlAdress} 
           className={ loggedIn ? "navigation__account navigation__link navigation__link-item_sided" : "navigation__link_invisible"}>
@@ -37,21 +37,21 @@ function Navigation (props) {
           <li className={loggedIn ? "navigation__link-item navigation__link-item_sided" :  "navigation__link-item"}>
             <Link 
             // to={props.urlAdress} 
-            className={loggedIn ? (props.visible? "navigation__link navigation__link_sided" : "navigation__link") : "navigation__link_invisible"}>
+            className={loggedIn ? (props.visibleNavigation? "navigation__link navigation__link_sided" : "navigation__link") : "navigation__link_invisible"}>
               {/* {props.links[0]} */} Главная
             </Link> 
           </li>
           <li className={loggedIn ? "navigation__link-item navigation__link-item_sided" :  "navigation__link-item"}>
             <Link 
             // to={props.urlAdress} 
-            className={loggedIn ? (props.visible? "navigation__link navigation__link_sided navigation__link_current" : "navigation__link") : "navigation__link_invisible"}>
+            className={loggedIn ? (props.visibleNavigation? "navigation__link navigation__link_sided navigation__link_current" : "navigation__link") : "navigation__link_invisible"}>
               {/* {props.links[0]} */} Фильмы
             </Link>
           </li>
           <li className={loggedIn ? "navigation__link-item navigation__link-item_sided" :  "navigation__link-item"}>
             <Link 
             // to={props.urlAdress} 
-            className={loggedIn ? (props.visible? "navigation__link navigation__link_sided" : "navigation__link") : "navigation__link_invisible"}>
+            className={loggedIn ? (props.visibleNavigation? "navigation__link navigation__link_sided" : "navigation__link") : "navigation__link_invisible"}>
               {/* {props.links[0]} */} Сохраненные Фильмы
             </Link>
           </li>
