@@ -1,5 +1,5 @@
 .profile {
-  height: calc(100vh - 74px);
+  height: fit-content;
   box-sizing: border-box;
   padding: 74px 0 70px;
   display: flex;
@@ -107,15 +107,16 @@
   font-size: 13px;
   line-height: 1.23;
   background: transparent;
-  font-weight: normal;
 }
 
 .profile__edit-btn {
   margin-bottom: 16px;
+  font-weight: normal;
 }
 
 .profile__exit-btn {
   color: #FF004D;
+  font-weight: 500;
 }
 
 .profile__save-btn {
@@ -151,3 +152,37 @@
   opacity: 0;
 }
 
+
+
+@media screen and (max-width: 768px) {
+  .profile {
+    padding: 236px 0 269px;
+  }
+
+  .profile__form-fields {
+    width: 53.5vw;
+  }
+
+  .profile__greeting {
+    margin-bottom: 96px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .profile {
+    padding: 70px 30px 40px;
+  }
+
+  .profile__form-fields, .profile__form {
+    width: 100%;
+  }
+
+  .profile__greeting {
+    margin-bottom: 80px;
+  }
+
+  .profile__edit-btn, .profile__exit-btn {
+    font-size: 12px;
+    line-height: 1.25;
+  }
+}
