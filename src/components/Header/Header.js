@@ -20,7 +20,7 @@ function Header (props) {
   
   return (
     <header className={`header ${headerStyle}`}>
-      <Link style={{ backgroundImage: `url(${headerLogo})` }} className="header__logo" />
+      <Link to="/" style={{ backgroundImage: `url(${headerLogo})` }} className="header__logo" />
       <Navigation toggleClass={props.toggleClass} visibleNavigation={props.visibleNavigation} />
     </header>
   )

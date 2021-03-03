@@ -14,10 +14,10 @@ function AboutMe(props) {
           <p className="about-me-text-bio">Я из Минска, Беларусь. Закончила в 2019 Европейский гуманитарный университет и получила степерь магистра в международной праве. В 2020 году решила войти в IT и начала курсы от Яндекс.Практикума. Это мой дипломный проект.</p>
           <ul className="about-me__links">
             <li className="about-me__link-item">
-              <Link className="about-me__link" to="#">Linkedin</Link>
+              <Link className="about-me__link" to="https://www.linkedin.com/in/willarion/">Linkedin</Link>
             </li>
             <li className="about-me__link-item">
-              <Link className="about-me__link" to="#">Github</Link>
+              <Link className="about-me__link" to="https://github.com/willarion">Github</Link>
             </li>
           </ul>
         </div>

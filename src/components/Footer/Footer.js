@@ -17,9 +17,9 @@ function Footer(props) {
       <div className="footer__navigation">
         <p className="footer__copyright">&#169; 2020</p>
         <nav className="footer__navigation-links">
-          <Link to="#" className="footer__navigation-link footer__link">Яндекс.Практикум</Link> 
-          <Link to="#" className="footer__navigation-link footer__link">Github</Link> 
-          <Link to="#" className="footer__navigation-link footer__link">Linkedin</Link> 
+          <Link to="https://praktikum.yandex.ru" className="footer__navigation-link footer__link">Яндекс.Практикум</Link> 
+          <Link to="https://github.com/willarion" className="footer__navigation-link footer__link">Github</Link> 
+          <Link to="https://www.linkedin.com/in/willarion/" className="footer__navigation-link footer__link">Linkedin</Link> 
         </nav>
       </div>
     </footer>

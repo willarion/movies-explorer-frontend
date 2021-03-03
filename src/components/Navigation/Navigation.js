@@ -27,7 +27,7 @@ function Navigation (props) {
       </div>
       <nav className={ loggedIn ? (props.visibleNavigation ? "navigation_sided navigation_visible navigation" : "navigation_sided navigation") : "navigation" }>
         <Link 
-          // to={props.urlAdress} 
+          to="/profile" 
           className={ loggedIn ? "navigation__account navigation__link navigation__link-item_sided" : "navigation__link_invisible"}>
           {/* {props.account} */} Аккаунт
           <div className="navigation__account-icon" />
@@ -36,30 +36,30 @@ function Navigation (props) {
         <ul className={loggedIn ? "navigation__links navigation__links_sided" : "navigation__links"}>
           <li className={loggedIn ? "navigation__link-item navigation__link-item_sided" :  "navigation__link-item"}>
             <Link 
-            // to={props.urlAdress} 
-            className={loggedIn ? (props.visibleNavigation? "navigation__link navigation__link_sided" : "navigation__link") : "navigation__link_invisible"}>
-              {/* {props.links[0]} */} Главная
+              to="/"
+              className={loggedIn ? (props.visibleNavigation? "navigation__link navigation__link_sided" : "navigation__link") : "navigation__link_invisible"}>
+              Главная
             </Link> 
           </li>
           <li className={loggedIn ? "navigation__link-item navigation__link-item_sided" :  "navigation__link-item"}>
             <Link 
-            // to={props.urlAdress} 
-            className={loggedIn ? (props.visibleNavigation? "navigation__link navigation__link_sided navigation__link_current" : "navigation__link") : "navigation__link_invisible"}>
-              {/* {props.links[0]} */} Фильмы
+              to="/movies"
+              className={loggedIn ? (props.visibleNavigation? "navigation__link navigation__link_sided navigation__link_current" : "navigation__link") : "navigation__link_invisible"}>
+              Фильмы
             </Link>
           </li>
           <li className={loggedIn ? "navigation__link-item navigation__link-item_sided" :  "navigation__link-item"}>
             <Link 
-            // to={props.urlAdress} 
-            className={loggedIn ? (props.visibleNavigation? "navigation__link navigation__link_sided" : "navigation__link") : "navigation__link_invisible"}>
-              {/* {props.links[0]} */} Сохраненные Фильмы
+              to="/saved-movies"
+              className={loggedIn ? (props.visibleNavigation? "navigation__link navigation__link_sided" : "navigation__link") : "navigation__link_invisible"}>
+              Сохраненные Фильмы
             </Link>
           </li>
           <li className={loggedIn ? "navigation__link-item navigation__link-item_sided" :  "navigation__link-item"}>
             <Link 
-            // to={props.urlAdress} 
-            className={loggedIn ? "navigation__link_invisible" : "navigation__link"}>
-              {/* {props.links[0]} */} Регистрация
+              to="/signup"
+              className={loggedIn ? "navigation__link_invisible" : "navigation__link"}>
+              Регистрация
             </Link>
           </li>
         </ul>
