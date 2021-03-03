@@ -31,9 +31,41 @@
   text-decoration: none;
   color: #2BE080;
   transition: opacity .3s;
+  font-size: 14px;
+  line-height: 1.2;
 }
 
 .not-found__back-btn:hover {
   opacity: .6;
   cursor: pointer;
+}
+
+
+@media screen and (max-width: 768px) {
+  .not-found {
+    padding: 40vh 0 21.7vh;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .not-found {
+    /* padding: 329px 0 30px;
+    height: 780px; */
+    padding: 50vw 0 30px;
+  }
+
+  .not-found__heading {
+    font-size: 80px;
+    margin-bottom: 10px;
+  }
+
+  .not-found__subheading {
+    font-size: 12px;
+    line-height: 1.25;
+  }
+
+  .not-found__back-btn {
+    font-size: 12px;
+    line-height: 1.25;
+  }
 }
