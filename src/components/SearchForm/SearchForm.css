@@ -36,7 +36,6 @@
 
 .search-form__input:focus {
   outline: none;
-  color: #A0A0A0;
 }
 
 ::-webkit-input-placeholder {
