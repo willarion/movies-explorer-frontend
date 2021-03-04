@@ -20,26 +20,29 @@ function App() {
     setLocation(loc.pathname);
   }, [loc]);
 
-  const [footerVisibility, setFooterVisibility] = React.useState('');
-  const [headerVisibility, setHeaderVisibility] = React.useState('');
-  const [headerColor, setHeaderColor] = React.useState(''); // white
+  const [footerVisibility, setFooterVisibility] = React.useState(true);
+  const [headerVisibility, setHeaderVisibility] = React.useState(true);
+  const [headerLight, setHeaderLight] = React.useState(true); 
 
   React.useEffect(() => {
     if (location === '/') {
-      setHeaderColor('header_dark');
-    } 
-    return;
-  }, [location]);
+      setHeaderLight(false);
+    } else {
+      setHeaderLight(true);
+    }
+  }, [location]); 
 
   React.useEffect(() => {
     if (location === '/profile') {
-      setFooterVisibility('footer_invisible');
-    }
+      setFooterVisibility(false);
+    } else
     if (location === '/register' || location === '/login' || (location !== '/' && location !== '/movies' && location !== '/saved-movies' && location !== '/profile')) {
-      setHeaderVisibility('header_invisible');
-      setFooterVisibility('footer_invisible');
-    } 
-    return;
+      setHeaderVisibility(false);
+      setFooterVisibility(false);
+    } else {
+      setHeaderVisibility(true);
+      setFooterVisibility(true);
+    }
   }, [location]);
 
 
@@ -57,7 +60,7 @@ function App() {
         toggleClass={toggleClass} 
         visibleNavigation={visibleNavigation}
         headerVisibility={headerVisibility}
-        headerColor={headerColor}
+        headerLight={headerLight}
       />
         <Switch>
           <Route exact path="/">

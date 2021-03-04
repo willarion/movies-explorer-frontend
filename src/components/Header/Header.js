@@ -4,22 +4,9 @@ import Navigation from '../Navigation/Navigation';
 import { Link } from 'react-router-dom';
 
 function Header (props) {
-
-  const [headerStyle, setHeaderStyle] = React.useState('');
-
-  React.useEffect(() => {
-    if (props.headerColor) {
-      setHeaderStyle(props.headerColor);
-    }
-    if (props.headerVisibility) {
-      setHeaderStyle(props.headerVisibility);
-    }
-    return;
-  });
-
   
   return (
-    <header className={`header ${headerStyle}`}>
+    <header className={ props.headerVisibility ? ( props.headerLight ? 'header' : 'header header_dark') : 'header_invisible' }>
       <Link to="/" style={{ backgroundImage: `url(${headerLogo})` }} className="header__logo" />
       <Navigation toggleClass={props.toggleClass} visibleNavigation={props.visibleNavigation} />
     </header>

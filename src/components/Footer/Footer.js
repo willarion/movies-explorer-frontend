@@ -5,8 +5,8 @@ function Footer(props) {
   const [footerStyle, setfooterStyle] = React.useState('');
 
   React.useEffect(() => {
-    if (props.footerVisibility) {
-      setfooterStyle(props.footerVisibility);
+    if (!props.footerVisibility) {
+      setfooterStyle('footer_invisible');
     }
     return;
   });
