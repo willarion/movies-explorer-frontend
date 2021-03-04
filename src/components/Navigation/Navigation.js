@@ -5,18 +5,16 @@ function Navigation (props) {
 
   const loggedIn = true;
 
-  const [linkStyleMobile, setLinkStyleMobile] = React.useState("navigation__link");
-  const [linksGroupStyleMobile, setLinksGroupStyleMobile] = React.useState("navigation__links");
+  const [pathToMovies, setPathToMovies] = React.useState(true);
 
   React.useEffect(() => {
-    if(loggedIn) {
-      setLinkStyleMobile("navigation__link_sided");
-      setLinksGroupStyleMobile("navigation__links_sided");
-    } else {
-      setLinkStyleMobile("navigation__link");
-      setLinksGroupStyleMobile("navigation__links");
+    if (props.linkUnderlined === '/movies') {
+      setPathToMovies(true);
+    } else if (props.linkUnderlined === '/saved-movies') {
+      setPathToMovies(false);
     }
-  }, [loggedIn]);
+    return;
+  });
 
   return (
     <>
@@ -37,21 +35,35 @@ function Navigation (props) {
           <li className={loggedIn ? "navigation__link-item navigation__link-item_sided" :  "navigation__link-item"}>
             <Link 
               to="/"
-              className={loggedIn ? (props.visibleNavigation? "navigation__link navigation__link_sided" : "navigation__link") : "navigation__link_invisible"}>
+              className={loggedIn ? "navigation__link navigation__link_sided navigation__link_current" : "navigation__link_invisible"}>
               Главная
             </Link> 
           </li>
           <li className={loggedIn ? "navigation__link-item navigation__link-item_sided" :  "navigation__link-item"}>
             <Link 
               to="/movies"
-              className={loggedIn ? (props.visibleNavigation? "navigation__link navigation__link_sided navigation__link_current" : "navigation__link") : "navigation__link_invisible"}>
+              className={
+                loggedIn ? 
+                  (props.visibleNavigation ? 
+                    (pathToMovies ? 
+                      "navigation__link navigation__link_sided navigation__link_current" : "navigation__link navigation__link_sided") 
+                  : (pathToMovies ? 
+                      "navigation__link navigation__link_current" : "navigation__link")) 
+                : "navigation__link_invisible"}>
               Фильмы
             </Link>
           </li>
           <li className={loggedIn ? "navigation__link-item navigation__link-item_sided" :  "navigation__link-item"}>
             <Link 
               to="/saved-movies"
-              className={loggedIn ? (props.visibleNavigation? "navigation__link navigation__link_sided" : "navigation__link") : "navigation__link_invisible"}>
+              className={
+                loggedIn ? 
+                  (props.visibleNavigation ? 
+                    (!pathToMovies ? 
+                      "navigation__link navigation__link_sided navigation__link_current" : "navigation__link navigation__link_sided") 
+                  : (!pathToMovies ? 
+                      "navigation__link navigation__link_current" : "navigation__link")) 
+                : "navigation__link_invisible"}>
               Сохраненные Фильмы
             </Link>
           </li>

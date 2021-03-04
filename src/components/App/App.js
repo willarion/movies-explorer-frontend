@@ -11,7 +11,7 @@ import Login from '../Login/Login';
 import NotFound from '../NotFound/NotFound';
 
 function App() {
-  // внешний вид и видимость header и footer в зависимости от страницы
+
   const [location, setLocation] = React.useState(window.location.pathname);
 
   const loc = useLocation();
@@ -20,6 +20,18 @@ function App() {
     setLocation(loc.pathname);
   }, [loc]);
 
+  // внешний вид ссылок навигации фильмы и сохраненные фильма
+  const [linkUnderlined, setLinkUnderlined] = React.useState('');
+
+  React.useEffect(() => {
+    if (location === '/movies' || location === '/saved-movies') {
+      setLinkUnderlined(location);
+    } 
+    return;
+  }, [location]);
+
+
+  // внешний вид и видимость header и footer в зависимости от страницы
   const [footerVisibility, setFooterVisibility] = React.useState(true);
   const [headerVisibility, setHeaderVisibility] = React.useState(true);
   const [headerLight, setHeaderLight] = React.useState(true); 
@@ -61,6 +73,7 @@ function App() {
         visibleNavigation={visibleNavigation}
         headerVisibility={headerVisibility}
         headerLight={headerLight}
+        linkUnderlined={linkUnderlined}
       />
         <Switch>
           <Route exact path="/">

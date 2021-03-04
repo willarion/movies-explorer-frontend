@@ -8,7 +8,7 @@ function Header (props) {
   return (
     <header className={ props.headerVisibility ? ( props.headerLight ? 'header' : 'header header_dark') : 'header_invisible' }>
       <Link to="/" style={{ backgroundImage: `url(${headerLogo})` }} className="header__logo" />
-      <Navigation toggleClass={props.toggleClass} visibleNavigation={props.visibleNavigation} />
+      <Navigation toggleClass={props.toggleClass} visibleNavigation={props.visibleNavigation} linkUnderlined={props.linkUnderlined} />
     </header>
   )
 }
