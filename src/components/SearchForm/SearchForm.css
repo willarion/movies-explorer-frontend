@@ -1,0 +1,123 @@
+.search-form {
+  min-height: 217px;
+  box-sizing: border-box;
+  padding: 70px 70px 48px;
+  display: flex;
+  flex-direction: column;
+}
+
+.search-form__input-container {
+  min-height: 50px;
+  border-bottom: 1px solid #E8E8E8;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding-bottom: 15px;
+  margin-bottom: 30px;
+}
+
+.search-form__illustration {
+  background-image: url(../../images/searchicon-black.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 34px;
+  width: 34px;
+}
+
+.search-form__input {
+  height: 34px;
+  width: 80%;
+  border: none;
+  font-weight: 500;
+  font-size: 28px;
+  line-height: 1.2;
+  color: #A0A0A0;
+}
+
+.search-form__input:focus {
+  outline: none;
+}
+
+::-webkit-input-placeholder {
+  text-align: center;
+  color: #A0A0A0;
+}
+
+:-moz-placeholder {
+  text-align: center;  
+  color: #A0A0A0;
+}
+
+::-moz-placeholder {
+  text-align: center;  
+  color: #A0A0A0;
+}
+
+:-ms-input-placeholder {  
+  text-align: center; 
+  color: #A0A0A0;
+}
+
+.search-form__btn {
+  width: 80px;
+  height: 34px;
+  background-image: url(../../images/find.svg);
+  background-repeat: no-repeat;
+  border: none;
+  background-color: transparent;
+  transition: opacity .3s ease-in 0s;
+}
+
+.search-form__btn:focus {
+  outline: none;
+}
+
+.search-form__btn:hover {
+  opacity: .6;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+  .search-form {
+    padding: 86px 30px 61px;
+  }
+
+  .search-form__input-container {
+    padding-bottom: 9px;
+  }
+
+  .search-form__illustration {
+    width: 46px;
+    height: 46px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .search-form {
+    padding: 98px 14px 50px;
+  }
+
+  .search-form__input-container {
+    margin-bottom: 42px;
+  }
+
+  .search-form__illustration {
+    display: none;
+  }
+
+  ::-webkit-input-placeholder {
+    text-align: start; 
+  }
+  
+  :-moz-placeholder {
+    text-align: start; 
+  }
+  
+  ::-moz-placeholder {
+    text-align: start; 
+  }
+  
+  :-ms-input-placeholder {  
+    text-align: start; 
+  }
+}

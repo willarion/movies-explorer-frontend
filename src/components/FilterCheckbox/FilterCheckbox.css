@@ -1,0 +1,108 @@
+@keyframes checked {
+  0% {
+    -webkit-transform: translate(0, 0);
+    -moz-transform: translate(0, 0);
+    -ms-transform: translate(0, 0);
+    -o-transform: translate(0, 0);
+    transform: translate(0, 0);
+  }
+  100% {
+    -webkit-transform: translate(-15px, 0);
+    -moz-transform: translate(-15px, 0);
+    -ms-transform: translate(-15px, 0);
+    -o-transform: translate(-15px, 0);
+    transform: translate(-15px, 0);
+  }
+}
+
+@keyframes unchecked {
+  0% {
+    -webkit-transform: translate(-15px, 0);
+    -moz-transform: translate(-15px, 0);
+    -ms-transform: translate(-15px, 0);
+    -o-transform: translate(-15px, 0);
+    transform: translate(-15px, 0);
+  }
+  100% {
+    -webkit-transform: translate(0, 0);
+    -moz-transform: translate(0, 0);
+    -ms-transform: translate(0, 0);
+    -o-transform: translate(0, 0);
+    transform: translate(0, 0);
+  }
+}
+
+
+.filter-checkbox {
+  align-self: center;
+  position: relative;
+}
+
+.filter-checkbox:hover {
+  color: rgba(1, 1, 1, 0.6);
+}
+
+.filter-checkbox__initial-picture {
+  position: absolute;
+  z-index: -1;
+  opacity: 0;
+}
+
+.filter-checkbox__label {
+  user-select: none;
+  cursor: pointer;
+  transition: color .3s ease-in 0s;
+  font-size: 14px;
+  line-height: 1.28;
+}
+
+.filter-checkbox__initial-picture:checked+.filter-checkbox__label{
+  color: rgba(1, 1, 1, 0.1);
+}
+
+.filter-checkbox:hover .filter-checkbox__initial-picture:checked+.filter-checkbox__label {
+  color: rgba(1, 1, 1, 0.3);
+}
+
+.filter-checkbox__label::before {
+  content: '';
+  position: absolute;
+  background: #FFFFFF;
+  box-shadow: 0px 4px 4px rgba(50, 50, 71, 0.08), 0px 4px 8px rgba(50, 50, 71, 0.06);
+  border-radius: 16px;
+  width: 36px;
+  height: 20px;
+  left: -48px;
+}
+
+.filter-checkbox__initial-picture+.filter-checkbox__label::after { /* кружочек справа*/
+  content: '';
+  position: absolute;
+  background: #2BE080;
+  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+  left: -30px;
+  top: 2px;
+  transition: background .3s ease-in 0s;
+  animation: unchecked .3s ease-out 0s 1 normal forwards;
+}
+
+.filter-checkbox__initial-picture:checked+.filter-checkbox__label::after { /* кружочек слева*/
+  content: '';
+  position: absolute;
+  background: #F5F5F5;
+  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+  left: -30px;
+  top: 2px;
+  animation: checked .3s ease-out 0s 1 normal forwards;
+}
+
+@media screen and (max-width: 600px) {
+  .filter-checkbox__label {
+    font-size: 11px;
+    line-height: 1.63;
+  }
+}
