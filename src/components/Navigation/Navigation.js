@@ -1,20 +1,11 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 function Navigation (props) {
 
   const loggedIn = true;
 
-  const [pathToMovies, setPathToMovies] = React.useState(true);
-
-  React.useEffect(() => {
-    if (props.linkUnderlined === '/movies') {
-      setPathToMovies(true);
-    } else if (props.linkUnderlined === '/saved-movies') {
-      setPathToMovies(false);
-    }
-    return;
-  });
+  const linksColor = props.headerLight ? 'navigation__link navigation__link_black' : 'navigation__link';
 
   return (
     <>
@@ -24,55 +15,47 @@ function Navigation (props) {
         />
       </div>
       <nav className={ loggedIn ? (props.visibleNavigation ? "navigation_sided navigation_visible navigation" : "navigation_sided navigation") : "navigation" }>
-        <Link 
+        <NavLink 
           to="/profile" 
           className={ loggedIn ? "navigation__account navigation__link navigation__link-item_sided" : "navigation__link_invisible"}>
           {/* {props.account} */} Аккаунт
           <div className="navigation__account-icon" />
-        </Link>
-        <button className={loggedIn ?  "navigation__link_invisible": "navigation__button navigation__link"}>Войти</button>
+        </NavLink>
+        <button className={loggedIn ?  "navigation__link_invisible" : "navigation__button navigation__link"}>Войти</button>
         <ul className={loggedIn ? "navigation__links navigation__links_sided" : "navigation__links"}>
           <li className={loggedIn ? "navigation__link-item navigation__link-item_sided" :  "navigation__link-item"}>
-            <Link 
-              to="/"
-              className={loggedIn ? "navigation__link navigation__link_sided navigation__link_current" : "navigation__link_invisible"}>
+            <NavLink 
+              exact to="/"
+              activeClassName={props.headerLight ? 'navigation__link_current navigation__link_current_black' : 'navigation__link_current'}
+              className={loggedIn ? "navigation__link navigation__link_sided" : "navigation__link_invisible"}
+            >
               Главная
-            </Link> 
+            </NavLink> 
           </li>
           <li className={loggedIn ? "navigation__link-item navigation__link-item_sided" :  "navigation__link-item"}>
-            <Link 
+            <NavLink 
               to="/movies"
-              className={
-                loggedIn ? 
-                  (props.visibleNavigation ? 
-                    (pathToMovies ? 
-                      "navigation__link navigation__link_sided navigation__link_current" : "navigation__link navigation__link_sided") 
-                  : (pathToMovies ? 
-                      "navigation__link navigation__link_current" : "navigation__link")) 
-                : "navigation__link_invisible"}>
+              activeClassName={props.headerLight ? 'navigation__link_current navigation__link_current_black' : 'navigation__link_current'}
+              className={loggedIn ? (props.visibleNavigation ? linksColor + " navigation__link_sided" : `${linksColor}` ) : "navigation__link_invisible"}
+            >
               Фильмы
-            </Link>
+            </NavLink>
           </li>
           <li className={loggedIn ? "navigation__link-item navigation__link-item_sided" :  "navigation__link-item"}>
-            <Link 
+            <NavLink 
               to="/saved-movies"
-              className={
-                loggedIn ? 
-                  (props.visibleNavigation ? 
-                    (!pathToMovies ? 
-                      "navigation__link navigation__link_sided navigation__link_current" : "navigation__link navigation__link_sided") 
-                  : (!pathToMovies ? 
-                      "navigation__link navigation__link_current" : "navigation__link")) 
-                : "navigation__link_invisible"}>
+              activeClassName={props.headerLight ? 'navigation__link_current navigation__link_current_black' : 'navigation__link_current'}
+              className={loggedIn ? (props.visibleNavigation ? linksColor + " navigation__link_sided" : `${linksColor}` ) : "navigation__link_invisible"}
+            >
               Сохраненные Фильмы
-            </Link>
+            </NavLink>
           </li>
           <li className={loggedIn ? "navigation__link-item navigation__link-item_sided" :  "navigation__link-item"}>
-            <Link 
+            <NavLink 
               to="/signup"
               className={loggedIn ? "navigation__link_invisible" : "navigation__link"}>
               Регистрация
-            </Link>
+            </NavLink>
           </li>
         </ul>
       </nav>

@@ -14,7 +14,7 @@
 }
 
 .navigation__link-item {
-  margin-right: 20px;
+  margin-left: 20px;
 }
 
 .navigation__link-item:first-of-type {
@@ -31,8 +31,16 @@
   transition: opacity .3s ease-in 0s;
 }
 
+.navigation__link_black {
+  color: #000;
+}
+
 .navigation__link_current {
-  border-bottom: 2px solid #000;
+  border-bottom: 2px solid #fff;
+}
+
+.navigation__link_current_black {
+  border-bottom-color: #000;
 }
 
 .navigation__link:focus {
@@ -220,6 +228,10 @@
     font-style: normal;
     font-weight: 500;
     margin: 0;
+  }
+
+  .navigation__link_current {
+    border-bottom: 2px solid #000;
   }
 
   .navigation__link-item_sided {
