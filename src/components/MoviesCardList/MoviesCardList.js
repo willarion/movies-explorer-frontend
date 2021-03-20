@@ -6,9 +6,9 @@ function MoviesCardList (props) {
 
   return (
     <section className="movies-card-list">
-      {/* <Preloader /> */}
+      { props.onLoading && <Preloader /> }
       <p className="movies-card-list__failed-search">
-        К сожалению, ничего не нашлось...
+        { props.onError ? 'Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз' : (props.onNothingFound ? 'К сожалению, ничего не нашлось...' : '')}
       </p>
       <ul className="movies-card-list__list">
         {props.cards.map((card) => (

@@ -10,7 +10,7 @@ function Navigation (props) {
   return (
     <>
       <div className={loggedIn ? "navigation__burger navigation__burger_visible" : "navigation__burger"} onClick={props.toggleClass}>
-        <label for="burger" 
+        <label htmlFor="burger" 
         className={props.visibleNavigation ? "navigation__burger-main-line navigation__burger-main-line_checked" : "navigation__burger-main-line"} 
         />
       </div>

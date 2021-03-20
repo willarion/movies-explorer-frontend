@@ -9,6 +9,8 @@ import Profile from '../Profile/Profile';
 import Register from '../Register/Register';
 import Login from '../Login/Login';
 import NotFound from '../NotFound/NotFound';
+import moviesApi from '../../utils/MoviesApi'
+ 
 
 function App() {
 
@@ -19,6 +21,7 @@ function App() {
   React.useEffect(() => {
     setLocation(loc.pathname);
   }, [loc]);
+
 
   // внешний вид и видимость header и footer в зависимости от страницы
   const [footerVisibility, setFooterVisibility] = React.useState(true);
@@ -46,7 +49,6 @@ function App() {
     }
   }, [location]);
 
-
   // видимость навигации
   const [visibleNavigation, setNavigationVisibility] = React.useState(false);
 
@@ -55,7 +57,77 @@ function App() {
     setNavigationVisibility(!currentVisibility);
   }
 
-  console.log(visibleNavigation);
+
+  // поиск фильмов
+  const [movieInput, setMovieInput] = React.useState('');
+  const [shorts, setShorts] = React.useState(false);
+  const [filteredMovies, setFilteredMovies] = React.useState([]);
+  const [loader, setLoader] = React.useState(false);
+  const [nothingFoundMessage, setNothingFoundMessage] = React.useState(false);
+  const [errorHappenedMessage, setErrorHappenedMessage] = React.useState(false);
+
+  function renderLoading(isLoading) {  
+    if (isLoading) {
+      setLoader(true);
+    } else {
+      setLoader(false);
+    }
+  }
+
+  function alertNothingFound(moviesArray) {
+    if (moviesArray.length === 0) {
+      setNothingFoundMessage(true);
+    } else {
+      setNothingFoundMessage(false);
+    }
+  }
+
+  function movieMatches(movie, searchInput) {
+    const keyWord = searchInput.toLowerCase();
+    const keyMovieData = Object.values(movie).slice(1, 8);
+    
+    return keyMovieData.some((value) => {
+      return String(value).toLocaleLowerCase().includes(keyWord);
+    });
+  }
+
+  function filterMovies(moviesArray, searchInput) {
+    let newMoviesArray;
+    if (shorts) {
+      newMoviesArray = moviesArray.filter((movie) => {
+        return movieMatches(movie, searchInput) && movie.duration < 41;
+      });
+    } else {
+      newMoviesArray = moviesArray.filter((movie) => {
+        return movieMatches(movie, searchInput);
+      });
+    }
+    setFilteredMovies(newMoviesArray);
+    alertNothingFound(newMoviesArray);
+  }
+
+  function handleMovieSearch() {
+    renderLoading(true)
+
+    moviesApi.getMovieList()
+      .then((res) => filterMovies(res, movieInput))
+      .catch((err) => {
+        setErrorHappenedMessage(true);
+        console.log(err);
+      })
+      .finally(() => renderLoading(false));
+  }
+
+  React.useEffect(() => {
+    if (filteredMovies.length > 0) {
+      localStorage.setItem('movies', JSON.stringify(filteredMovies));
+    }
+  }, [filteredMovies]);
+
+
+  console.log(filteredMovies);
+
+
 
   return (
     <>
@@ -70,7 +142,15 @@ function App() {
             <Main />
           </Route>
           <Route path="/movies">
-            <Movies />
+            <Movies
+              onMovieSearch={handleMovieSearch}
+              movieInput={movieInput}
+              setMovieInput={setMovieInput}
+              onShorts={setShorts}
+              onLoading={loader}
+              onNothingFound={nothingFoundMessage}
+              onError={errorHappenedMessage}
+            />
           </Route>
           <Route path="/saved-movies">
             <SavedMovies class={'movies-card__btn_state_delete'} />

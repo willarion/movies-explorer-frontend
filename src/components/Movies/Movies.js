@@ -51,8 +51,18 @@ function Movies (props) {
 
   return (
     <main>
-      <SearchForm />
-      <MoviesCardList cards={cards} />
+      <SearchForm 
+        onMovieSearch={props.onMovieSearch}
+        movieInput={props.movieInput}
+        setMovieInput={props.setMovieInput}
+        onShorts={props.onShorts}
+      />
+      <MoviesCardList 
+        cards={cards} 
+        onLoading={props.onLoading}
+        onNothingFound={props.onNothingFound}
+        onError={props.onError}
+      />
     </main>
   )
 }
