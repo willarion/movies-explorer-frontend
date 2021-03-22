@@ -7,22 +7,16 @@ function SearchForm(props) {
 
   function handleMovieChange(e) {
     const value = e.target.value;
-    let input;
 
-    if (value === undefined) {
+    if (value === undefined || value.trim() === '') {
       setErrorMessage('Нужно ввести ключевое слово');
-      return false;
-    } else {
-      input = value.trim();
+      props.setMovieInput('');
 
-      if (input.length === 0) {
-        setErrorMessage('Нужно ввести ключевое слово');
-      } else {
+    } else {
         setErrorMessage('');
-        props.setMovieInput(input);
+        props.setMovieInput(value);
       }
-    }
-  }
+    }  
 
   function handleSubmit(e) {
     e.preventDefault();
