@@ -65,6 +65,7 @@ function App() {
   const [loader, setLoader] = React.useState(false);
   const [nothingFoundMessage, setNothingFoundMessage] = React.useState(false);
   const [errorHappenedMessage, setErrorHappenedMessage] = React.useState(false);
+  const [searchHappened, setSearchHappened] = React.useState(false);
 
   function renderLoading(isLoading) {  
     if (isLoading) {
@@ -107,7 +108,8 @@ function App() {
   }
 
   function handleMovieSearch() {
-    renderLoading(true)
+    renderLoading(true);
+    setSearchHappened(true);
 
     moviesApi.getMovieList()
       .then((res) => filterMovies(res, movieInput))
@@ -123,10 +125,6 @@ function App() {
       localStorage.setItem('movies', JSON.stringify(filteredMovies));
     }
   }, [filteredMovies]);
-
-
-  console.log(filteredMovies);
-
 
 
   return (
@@ -150,10 +148,12 @@ function App() {
               onLoading={loader}
               onNothingFound={nothingFoundMessage}
               onError={errorHappenedMessage}
+              searchHappened={searchHappened}
+              filteredMovies={filteredMovies}
             />
           </Route>
           <Route path="/saved-movies">
-            <SavedMovies class={'movies-card__btn_state_delete'} />
+            <SavedMovies />
           </Route>
           <Route path="/profile">
             <Profile />
