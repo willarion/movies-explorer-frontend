@@ -1,5 +1,6 @@
 import React from 'react';
 import { Route, Switch, useLocation } from 'react-router-dom';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import Footer from '../Footer/Footer';
 import Header from '../Header/Header';
 import Main from '../Main/Main';
@@ -13,6 +14,8 @@ import moviesApi from '../../utils/MoviesApi'
  
 
 function App() {
+
+  const [currentUser, setCurrentUser] = React.useState({});
 
   const [location, setLocation] = React.useState(window.location.pathname);
 
@@ -60,6 +63,11 @@ function App() {
 
   // поиск фильмов
   const [movieInput, setMovieInput] = React.useState('');
+
+
+  console.log(movieInput);
+
+
   const [shorts, setShorts] = React.useState(false);
   const [filteredMovies, setFilteredMovies] = React.useState([]);
   const [loader, setLoader] = React.useState(false);
@@ -129,48 +137,50 @@ function App() {
 
   return (
     <>
-      <Header 
-        toggleClass={toggleClass} 
-        visibleNavigation={visibleNavigation}
-        headerVisibility={headerVisibility}
-        headerLight={headerLight}
-      />
-        <Switch>
-          <Route exact path="/">
-            <Main />
-          </Route>
-          <Route path="/movies">
-            <Movies
-              onMovieSearch={handleMovieSearch}
-              movieInput={movieInput}
-              setMovieInput={setMovieInput}
-              onShorts={setShorts}
-              onLoading={loader}
-              onNothingFound={nothingFoundMessage}
-              onError={errorHappenedMessage}
-              searchHappened={searchHappened}
-              filteredMovies={filteredMovies}
-            />
-          </Route>
-          <Route path="/saved-movies">
-            <SavedMovies />
-          </Route>
-          <Route path="/profile">
-            <Profile />
-          </Route>
-          <Route path="/signup">
-            <Register />
-          </Route>
-          <Route path="/signin">
-            <Login />
-          </Route>
-          <Route path="*">
-            <NotFound />
-          </Route>
-        </Switch>
-      <Footer 
-        footerVisibility={footerVisibility}
-      />
+      <CurrentUserContext.Provider value={currentUser}>
+        <Header 
+          toggleClass={toggleClass} 
+          visibleNavigation={visibleNavigation}
+          headerVisibility={headerVisibility}
+          headerLight={headerLight}
+        />
+          <Switch>
+            <Route exact path="/">
+              <Main />
+            </Route>
+            <Route path="/movies">
+              <Movies
+                onMovieSearch={handleMovieSearch}
+                movieInput={movieInput}
+                setMovieInput={setMovieInput}
+                onShorts={setShorts}
+                onLoading={loader}
+                onNothingFound={nothingFoundMessage}
+                onError={errorHappenedMessage}
+                searchHappened={searchHappened}
+                filteredMovies={filteredMovies}
+              />
+            </Route>
+            <Route path="/saved-movies">
+              <SavedMovies />
+            </Route>
+            <Route path="/profile">
+              <Profile />
+            </Route>
+            <Route path="/signup">
+              <Register />
+            </Route>
+            <Route path="/signin">
+              <Login />
+            </Route>
+            <Route path="*">
+              <NotFound />
+            </Route>
+          </Switch>
+        <Footer 
+          footerVisibility={footerVisibility}
+        />
+      </CurrentUserContext.Provider>
     </>
   );
 }

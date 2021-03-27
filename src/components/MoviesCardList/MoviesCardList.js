@@ -12,7 +12,7 @@ function MoviesCardList (props) {
     mobile: 2,
   }
   const moviesToRender = props.filteredMovies !== null ? props.filteredMovies : [];
-  
+
 
   React.useEffect(() => {
     let timeout = null;
@@ -63,15 +63,6 @@ function MoviesCardList (props) {
     }
   }
 
-  function calculateDuration(duration) {
-    const hours = Math.floor(duration / 60);
-    const minutes = duration % 60;
-
-    const durationStatement = `{${hours} ч ${minutes} м}`;
-
-    return durationStatement;
-  }
-
   console.log(props.filteredMovies);
   console.log(amountToRender);
   console.log(moviesToRender.slice(0, amountToRender));
@@ -83,9 +74,9 @@ function MoviesCardList (props) {
         { props.onError ? 'Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз' : (props.onNothingFound ? 'К сожалению, ничего не нашлось...' : '')}
       </p>
       <ul className="movies-card-list__list">
-        {/* {props.cards.map((card) => (
-          <MoviesCard likeBtn={true} card={card} key={card._id} />
-        ))} */}
+        {(moviesToRender !== null || moviesToRender !== undefined ) && moviesToRender.slice(0, amountToRender).map((card) => (
+          <MoviesCard likeBtn={true} card={card} key={card.id} />
+        ))}
       </ul>
      { moreBtn && <button className="movies-card-list__btn" type="button" onClick={showMoreMovies} >Ещё</button> }
     </section>

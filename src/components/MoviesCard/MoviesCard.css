@@ -68,6 +68,9 @@
   cursor: pointer;
 }
 
+.movies-card__btn_state_like {
+  background-image: url(../../images/like.svg);
+}
 .movies-card__btn_state_is-liked {
   background-image: url(../../images/is-liked.svg);
 }

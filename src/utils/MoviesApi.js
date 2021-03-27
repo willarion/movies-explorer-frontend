@@ -1,4 +1,4 @@
-import {movieApiSettings} from '../utils/constants'
+import {movieApiSettings} from './constants'
 
 class Api {
   
@@ -14,7 +14,7 @@ class Api {
   }
 
   getMovieList(token) {
-    return fetch(`${this._baseUrl}`, {
+    return fetch(`${this._baseUrl}/beatfilm-movies`, {
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
@@ -24,7 +24,6 @@ class Api {
     })
     .then(this._handleOriginalResponse);
   }  
-
 }
 
 const moviesApi = new Api(movieApiSettings);

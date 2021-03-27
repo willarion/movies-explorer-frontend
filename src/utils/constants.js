@@ -1,5 +1,9 @@
 const movieApiSettings = {
-  baseUrl: 'https://api.nomoreparties.co/beatfilm-movies',
+  baseUrl: 'https://api.nomoreparties.co',
 }
 
-export { movieApiSettings };
+const mainApiSettings = {
+  baseUrl: 'http://api.movies.willarion.students.nomoredomains.monster',
+}
+
+export { movieApiSettings, mainApiSettings };
