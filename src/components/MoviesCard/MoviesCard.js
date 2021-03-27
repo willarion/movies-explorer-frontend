@@ -8,11 +8,14 @@ function MoviesCard (props) {
   //temporary token
   const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDVjZGY4Mjk3NmMzNTNkMjhjYTQ3OWIiLCJpYXQiOjE2MTY2OTkzMDYsImV4cCI6MTYxNzMwNDEwNn0.mJFt9Qfa9i-5k7eVXxD8By4_l5Wi6AKA2W7OB5ETddg';
 
-  const currentUser = React.useContext(CurrentUserContext);
-  const [likeStatus, setLikeStatus] = React.useState(false);
-
   const likeBtn = props.likeBtn ? 'movies-card__btn_state_like' : '';
   const deleteBtn = props.deleteBtn ? 'movies-card__btn_state_delete' : '';
+
+  const currentUser = React.useContext(CurrentUserContext);
+  const [src, setSrc] = React.useState('');
+  const isLiked = props.savedCards.some((savedMovie) => savedMovie.description === props.card.description);
+  const [likeStatus, setLikeStatus] = React.useState(false);
+  const [isClicked, setIsClicked] = React.useState(false);
 
   function calculateDuration(duration) {
     const hours = Math.floor(duration / 60);
@@ -23,56 +26,86 @@ function MoviesCard (props) {
     return durationStatement;
   }
 
-  // const isLiked = props.card.owner === currentUser._id;
-  // сделать гет кардс (user's cards) и оттуда передавать props.card.owner, чтобы выяснить isOwned? 
-  
-  // temporary
-  // const isLiked = true;
-  const isLiked = false; 
-  const movieId = 1; 
-
+  React.useEffect(() => {
+    if (likeBtn) {
+      const src = props.card.image !== null ? movieApiSettings.baseUrl + props.card.image.url : '#';
+      setSrc(src);
+    } else 
+    if (deleteBtn) {
+      const src = props.card.image;
+      setSrc(src);
+    }
+  }, []);
 
   function handleBtnClick(e) {
     e.stopPropagation();
-        const card = {
-          country: props.card.country,
-          director: props.card.director,
-          duration: props.card.duration,
-          year: props.card.year,
-          description: props.card.description,
-          image: movieApiSettings.baseUrl + props.card.image.url,
-          trailer: props.card.trailerLink,
-          thumbnail: movieApiSettings.baseUrl + props.card.image.formats.thumbnail.url,
-          movieId: props.card.id, // id from original db
-          nameRU: props.card.nameRU, 
-          nameEN: props.card.nameEN, 
-        }
-
-        const info = (obj) => {
-          let o = {};
-          for (var key in obj) {
-            o[key] = obj[key]  ? obj[key] : 'не указано';
-          }
-          console.log(o);
-          return o;
-        }
-
-        const cardInfo = info(card);
 
     if (likeBtn) {
-      if (!isLiked) { // если не лайкнуто
-        setLikeStatus(true);
-        mainApi.changeLikeCardStatus({token, isLiked, cardInfo}) // isLiked - true
-        console.log('лайкнуть')
-      } else {
-        setLikeStatus(false);
-        mainApi.changeLikeCardStatus({token, movieId, isLiked}) // isLiked - false
-        console.log('убрать лайк')
+      const card = {
+        country: props.card.country,
+        director: props.card.director,
+        duration: props.card.duration,
+        year: props.card.year,
+        description: props.card.description,
+        image: movieApiSettings.baseUrl + props.card.image.url,
+        trailer: props.card.trailerLink,
+        thumbnail: movieApiSettings.baseUrl + props.card.image.formats.thumbnail.url,
+        movieId: props.card.id, // id from original db
+        nameRU: props.card.nameRU, 
+        nameEN: props.card.nameEN, 
       }
+
+      const info = (obj) => {
+        let newObj = {};
+        for (var key in obj) {
+          newObj[key] = obj[key] ? obj[key] : 'не указано';
+        }
+        return newObj;
+      }
+
+      const cardInfo = info(card);
+
+
+      if (isLiked || likeStatus) {
+
+        // ОПРЕДЕЛИТЬ ID 
+        const movieId = props.savedCards.find((savedMovie) => savedMovie.description === props.card.description)._id;
+        console.log(movieId);
+
+        mainApi.changeMovieLikeStatus({token, movieId, isLiked: true})
+          .then(() => {
+            setLikeStatus(false);
+            setIsClicked(true);
+            props.getMovies(token);
+            console.log('убрать лайк')
+          })
+          .catch((err) => console.log(err));
+      } else { // если не лайкнуто
+        mainApi.changeMovieLikeStatus({token, isLiked: false, cardInfo})
+          .then(() => {
+            setLikeStatus(true);
+            setIsClicked(true);
+            props.getMovies(token);
+            console.log('лайкнуть')
+          })
+          .catch((err) => console.log(err));
+        
+      }
+    } else 
+    if (deleteBtn) {
+      const movieId = props.card._id;
+      mainApi.deleteMovie({token, movieId})
+        .then(() => props.getMovies(token))
+        .catch((err) => console.log(err));
+
+      console.log('пробуем удалить карточку');
     }
   }
- 
 
+  // console.log(likeStatus);
+  // console.log(isLiked);
+  // console.log(isClicked);
+  console.log(props.savedCards);
 
   return (
     <div className="movies-card" onClick={() => window.open(props.card.trailerLink)}>
@@ -84,13 +117,13 @@ function MoviesCard (props) {
           className={`
             movies-card__btn 
             ${likeBtn} 
-            ${likeStatus ? 'movies-card__btn_state_is-liked' : ''}
+            ${isClicked ? (likeStatus ? 'movies-card__btn_state_is-liked' : '') : (isLiked ? 'movies-card__btn_state_is-liked' : '')}
             ${deleteBtn}
           `} 
           onClick={handleBtnClick}
         />
       </div>
-      <img alt="иллюстрация" src={props.card.image !== null ? movieApiSettings.baseUrl + props.card.image.url : '#'} className="movies-card__image" />
+      <img alt="иллюстрация" src={src} className="movies-card__image" />
     </div>
   )
 }

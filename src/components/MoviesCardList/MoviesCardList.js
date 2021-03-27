@@ -5,6 +5,8 @@ import Preloader from '../Preloader/Preloader';
 function MoviesCardList (props) {
 
   const [width, setWidth] = React.useState(window.innerWidth);
+  const [likeBtn, setLikeBtn] = React.useState(false);
+  const [deleteBtn, setDeleteBtn] = React.useState(false);
   const [moreBtn, setMoreBtn] = React.useState(false);
   const [amountToRender, setAmountToRender] = React.useState(0);
   const showMoreCounter = {
@@ -12,7 +14,17 @@ function MoviesCardList (props) {
     mobile: 2,
   }
   const moviesToRender = props.filteredMovies !== null ? props.filteredMovies : [];
+  console.log(moviesToRender);
 
+  React.useEffect(() => {
+    if (props.likeBtn) {
+      setLikeBtn(true);
+      setDeleteBtn(false);
+    } else if (props.deleteBtn) {
+      setDeleteBtn(true);
+      setLikeBtn(false);
+    }
+  }, [props.likeBtn, props.deleteBtn]);
 
   React.useEffect(() => {
     let timeout = null;
@@ -64,8 +76,8 @@ function MoviesCardList (props) {
   }
 
   console.log(props.filteredMovies);
-  console.log(amountToRender);
-  console.log(moviesToRender.slice(0, amountToRender));
+  // console.log(amountToRender);
+  // console.log(moviesToRender.slice(0, amountToRender));
 
   return (
     <section className="movies-card-list">
@@ -75,7 +87,14 @@ function MoviesCardList (props) {
       </p>
       <ul className="movies-card-list__list">
         {(moviesToRender !== null || moviesToRender !== undefined ) && moviesToRender.slice(0, amountToRender).map((card) => (
-          <MoviesCard likeBtn={true} card={card} key={card.id} />
+          <MoviesCard 
+            likeBtn={likeBtn} 
+            deleteBtn={deleteBtn}
+            card={card} 
+            key={card.id || card._id} 
+            getMovies={props.getMovies}
+            savedCards={props.savedCards}
+          />
         ))}
       </ul>
      { moreBtn && <button className="movies-card-list__btn" type="button" onClick={showMoreMovies} >Ещё</button> }

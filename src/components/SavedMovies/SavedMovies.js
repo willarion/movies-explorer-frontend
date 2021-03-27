@@ -3,34 +3,20 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import SearchForm from '../SearchForm/SearchForm'
 
 function SavedMovies (props) {
-  const disabledBtn = "movies-card-list__btn_disabled";
-  const deleteFilmBtn = "movies-card__btn_state_delete"
 
-  const cards = [ // temporary data 
-    {
-      _id: 1,
-      name: 'sfdf',
-      duration: 111,
-      image: 'https://poster.nicefon.ru/2018_03/13/1080x610/2086154521359db595d245.jpg',
-    },
-    {
-      _id: 21,
-      name: 'sfdf',
-      duration: 111,
-      image: 'https://poster.nicefon.ru/2018_03/13/1080x610/2086154521359db595d245.jpg',
-    },
-    {
-      _id: 12,
-      name: 'sfdf',
-      duration: 111,
-      image: 'https://poster.nicefon.ru/2018_03/13/1080x610/2086154521359db595d245.jpg',
-    },
-  ] 
+  const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDVjZGY4Mjk3NmMzNTNkMjhjYTQ3OWIiLCJpYXQiOjE2MTY2OTkzMDYsImV4cCI6MTYxNzMwNDEwNn0.mJFt9Qfa9i-5k7eVXxD8By4_l5Wi6AKA2W7OB5ETddg';
 
   return (
     <main>
-      <SearchForm />
-      <MoviesCardList cards={cards} disabledBtn={disabledBtn} deleteFilmBtn={deleteFilmBtn} />
+      <SearchForm 
+        onShorts={props.onShorts}
+      />
+      <MoviesCardList 
+        deleteBtn={true}
+        filteredMovies={props.savedCards} 
+        savedCards={props.savedCards} 
+        getMovies={props.getMovies}
+      />
     </main>
   )
 }

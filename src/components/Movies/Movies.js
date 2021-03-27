@@ -20,6 +20,9 @@ function Movies (props) {
         onNothingFound={props.onNothingFound}
         onError={props.onError}
         filteredMovies={movies}
+        likeBtn={true}
+        getMovies={props.getMovies}
+        savedCards={props.savedCards}
       />
     </main>
   )

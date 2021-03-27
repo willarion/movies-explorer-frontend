@@ -11,10 +11,10 @@ import Register from '../Register/Register';
 import Login from '../Login/Login';
 import NotFound from '../NotFound/NotFound';
 import moviesApi from '../../utils/MoviesApi'
+import mainApi from '../../utils/MainApi';
  
 
 function App() {
-
   const [currentUser, setCurrentUser] = React.useState({});
 
   const [location, setLocation] = React.useState(window.location.pathname);
@@ -63,11 +63,6 @@ function App() {
 
   // поиск фильмов
   const [movieInput, setMovieInput] = React.useState('');
-
-
-  console.log(movieInput);
-
-
   const [shorts, setShorts] = React.useState(false);
   const [filteredMovies, setFilteredMovies] = React.useState([]);
   const [loader, setLoader] = React.useState(false);
@@ -115,24 +110,46 @@ function App() {
     alertNothingFound(newMoviesArray);
   }
 
+  function getSearchedMovies() {
+    moviesApi.getMovieList()
+    .then((res) => filterMovies(res, movieInput))
+    .catch((err) => {
+      setErrorHappenedMessage(true);
+      console.log(err);
+    })
+    .finally(() => renderLoading(false));
+  }
+
   function handleMovieSearch() {
     renderLoading(true);
     setSearchHappened(true);
-
-    moviesApi.getMovieList()
-      .then((res) => filterMovies(res, movieInput))
-      .catch((err) => {
-        setErrorHappenedMessage(true);
-        console.log(err);
-      })
-      .finally(() => renderLoading(false));
+    getSearchedMovies();
   }
+    
 
   React.useEffect(() => {
     if (filteredMovies.length > 0) {
       localStorage.setItem('movies', JSON.stringify(filteredMovies));
     }
   }, [filteredMovies]);
+
+  const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDVjZGY4Mjk3NmMzNTNkMjhjYTQ3OWIiLCJpYXQiOjE2MTY2OTkzMDYsImV4cCI6MTYxNzMwNDEwNn0.mJFt9Qfa9i-5k7eVXxD8By4_l5Wi6AKA2W7OB5ETddg';
+
+  const [savedCards, setSavedCards] = React.useState([]);
+
+  function getMovies(token) { // сохраненные фильмы 
+    mainApi.getMovies(token)
+      .then((res) => {
+        setSavedCards(res);
+      })
+      .catch((err) => {
+        console.log(`Ошибка: ${err}`);
+      });
+  }
+
+  React.useEffect(() => { // изначальный рендер карточек
+    getMovies(token);
+  }, []); 
 
 
   return (
@@ -159,10 +176,16 @@ function App() {
                 onError={errorHappenedMessage}
                 searchHappened={searchHappened}
                 filteredMovies={filteredMovies}
+                getMovies={getMovies}
+                savedCards={savedCards}
               />
             </Route>
             <Route path="/saved-movies">
-              <SavedMovies />
+              <SavedMovies
+                onShorts={setShorts}
+                getMovies={getMovies}
+                savedCards={savedCards}
+              />
             </Route>
             <Route path="/profile">
               <Profile />
