@@ -77,7 +77,6 @@ function MoviesCard (props) {
             setLikeStatus(false);
             setIsClicked(true);
             props.getMovies(token);
-            console.log('убрать лайк')
           })
           .catch((err) => console.log(err));
       } else { // если не лайкнуто
@@ -86,26 +85,16 @@ function MoviesCard (props) {
             setLikeStatus(true);
             setIsClicked(true);
             props.getMovies(token);
-            console.log('лайкнуть')
           })
           .catch((err) => console.log(err));
-        
       }
-    } else 
-    if (deleteBtn) {
+    } else if (deleteBtn) {
       const movieId = props.card._id;
       mainApi.deleteMovie({token, movieId})
         .then(() => props.getMovies(token))
         .catch((err) => console.log(err));
-
-      console.log('пробуем удалить карточку');
     }
   }
-
-  // console.log(likeStatus);
-  // console.log(isLiked);
-  // console.log(isClicked);
-  console.log(props.savedCards);
 
   return (
     <div className="movies-card" onClick={() => window.open(props.card.trailerLink)}>

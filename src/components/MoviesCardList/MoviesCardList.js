@@ -14,7 +14,6 @@ function MoviesCardList (props) {
     mobile: 2,
   }
   const moviesToRender = props.filteredMovies !== null ? props.filteredMovies : [];
-  console.log(moviesToRender);
 
   React.useEffect(() => {
     if (props.likeBtn) {
@@ -46,12 +45,12 @@ function MoviesCardList (props) {
   }, [])
 
   React.useEffect(() => {
-    if (moviesToRender.length >= 3) {
+    if (moviesToRender.length >= 3 && !(moviesToRender.length === amountToRender && amountToRender !== 0)) {
       setMoreBtn(true);
     } else {
       setMoreBtn(false);
     }
-  }, [moviesToRender]);
+  }, [moviesToRender, amountToRender]);
 
   React.useEffect(() => {
     if (moviesToRender.length > 0) {
@@ -74,10 +73,6 @@ function MoviesCardList (props) {
       } 
     }
   }
-
-  console.log(props.filteredMovies);
-  // console.log(amountToRender);
-  // console.log(moviesToRender.slice(0, amountToRender));
 
   return (
     <section className="movies-card-list">

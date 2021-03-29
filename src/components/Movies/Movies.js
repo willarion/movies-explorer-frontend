@@ -6,7 +6,6 @@ function Movies (props) {
 
   const movies = props.searchHappened ? props.filteredMovies : JSON.parse(localStorage.getItem('movies'));
 
-
   return (
     <main>
       <SearchForm 

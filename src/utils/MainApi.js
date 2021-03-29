@@ -27,7 +27,6 @@ class Api {
   }
 
   changeMovieLikeStatus({token, isLiked, movieId, cardInfo}) {
-    console.log(isLiked, movieId, cardInfo);
     if (!isLiked) { // false значит, что лайка нет
       //putCardLike
 

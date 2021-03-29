@@ -12,7 +12,7 @@ import Login from '../Login/Login';
 import NotFound from '../NotFound/NotFound';
 import moviesApi from '../../utils/MoviesApi'
 import mainApi from '../../utils/MainApi';
- 
+import { filterMovies } from '../../utils/helpers';
 
 function App() {
   const [currentUser, setCurrentUser] = React.useState({});
@@ -61,7 +61,7 @@ function App() {
   }
 
 
-  // поиск фильмов
+  // поиск фильмов (по внешнему АПИ)
   const [movieInput, setMovieInput] = React.useState('');
   const [shorts, setShorts] = React.useState(false);
   const [filteredMovies, setFilteredMovies] = React.useState([]);
@@ -86,33 +86,13 @@ function App() {
     }
   }
 
-  function movieMatches(movie, searchInput) {
-    const keyWord = searchInput.toLowerCase();
-    const keyMovieData = Object.values(movie).slice(1, 8);
-    
-    return keyMovieData.some((value) => {
-      return String(value).toLocaleLowerCase().includes(keyWord);
-    });
-  }
-
-  function filterMovies(moviesArray, searchInput) {
-    let newMoviesArray;
-    if (shorts) {
-      newMoviesArray = moviesArray.filter((movie) => {
-        return movieMatches(movie, searchInput) && movie.duration < 41;
-      });
-    } else {
-      newMoviesArray = moviesArray.filter((movie) => {
-        return movieMatches(movie, searchInput);
-      });
-    }
-    setFilteredMovies(newMoviesArray);
-    alertNothingFound(newMoviesArray);
-  }
-
   function getSearchedMovies() {
     moviesApi.getMovieList()
-    .then((res) => filterMovies(res, movieInput))
+    .then((res) => {
+      const newMoviesArray = filterMovies(shorts, res, movieInput);
+      setFilteredMovies(newMoviesArray);
+      alertNothingFound(newMoviesArray);
+    })
     .catch((err) => {
       setErrorHappenedMessage(true);
       console.log(err);
@@ -125,7 +105,6 @@ function App() {
     setSearchHappened(true);
     getSearchedMovies();
   }
-    
 
   React.useEffect(() => {
     if (filteredMovies.length > 0) {
@@ -136,8 +115,9 @@ function App() {
   const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDVjZGY4Mjk3NmMzNTNkMjhjYTQ3OWIiLCJpYXQiOjE2MTY2OTkzMDYsImV4cCI6MTYxNzMwNDEwNn0.mJFt9Qfa9i-5k7eVXxD8By4_l5Wi6AKA2W7OB5ETddg';
 
   const [savedCards, setSavedCards] = React.useState([]);
+  const [filteredSavedCards, setFilteredSavedCards] = React.useState([]);
 
-  function getMovies(token) { // сохраненные фильмы 
+  function getSavedMovies(token) { // сохраненные фильмы 
     mainApi.getMovies(token)
       .then((res) => {
         setSavedCards(res);
@@ -147,10 +127,16 @@ function App() {
       });
   }
 
-  React.useEffect(() => { // изначальный рендер карточек
-    getMovies(token);
+  React.useEffect(() => { // обновление сохраненных фильмов
+    getSavedMovies(token);
   }, []); 
 
+  function getSearchedSavedMovies() {
+      setSearchHappened(true);
+      const newMoviesArray = filterMovies(shorts, savedCards, movieInput);
+      setFilteredSavedCards(newMoviesArray);
+      alertNothingFound(newMoviesArray);
+  }
 
   return (
     <>
@@ -176,15 +162,21 @@ function App() {
                 onError={errorHappenedMessage}
                 searchHappened={searchHappened}
                 filteredMovies={filteredMovies}
-                getMovies={getMovies}
+                getMovies={getSavedMovies}
                 savedCards={savedCards}
               />
             </Route>
             <Route path="/saved-movies">
               <SavedMovies
                 onShorts={setShorts}
-                getMovies={getMovies}
+                getMovies={getSavedMovies}
                 savedCards={savedCards}
+                filteredMovies={filteredSavedCards}
+                onSavedMovieSearch={getSearchedSavedMovies}
+                setMovieInput={setMovieInput}
+                movieInput={movieInput}
+                searchHappened={searchHappened}
+                onNothingFound={nothingFoundMessage}
               />
             </Route>
             <Route path="/profile">
