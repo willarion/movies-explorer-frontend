@@ -81,13 +81,19 @@
   font-size: 10px;
   line-height: 1.2;
   height: 12px;
-  opacity: 1;
+  opacity: 0;
   color: #EE3465;
   transition: opacity .3s;
 }
 
-.register__input-error_visible {
-  opacity: 0;
+.register__general-error_visible {
+  opacity: 1;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.register__input-line:focus+.register__input-error_visible {
+  opacity: 1;
 }
 
 .register__form-btns {

@@ -1,6 +1,7 @@
 import React from 'react';
-import { Route, Switch, useLocation } from 'react-router-dom';
+import { Route, Switch, useLocation, useHistory } from 'react-router-dom';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import Footer from '../Footer/Footer';
 import Header from '../Header/Header';
 import Main from '../Main/Main';
@@ -12,9 +13,30 @@ import Login from '../Login/Login';
 import NotFound from '../NotFound/NotFound';
 import moviesApi from '../../utils/MoviesApi'
 import mainApi from '../../utils/MainApi';
-import { filterMovies } from '../../utils/helpers';
+import { filterMovies } from '../../utils/MoviesFilter';
 
 function App() {
+
+  const history = useHistory();
+
+  const [loggedIn, setLoggedIn] = React.useState(true);
+  const [registerResultMessage, setRegisterResultMessage] = React.useState('');
+  const [loginResultMessage, setLoginResultMessage] = React.useState('');
+
+  function signUp(password, email, name) {
+    return mainApi.register(password, email, name)
+    .then((res) => {
+      if (res) {
+        setRegisterResultMessage('');
+        history.push('/signin');
+      } else {
+        setRegisterResultMessage('Что-то пошло не так! Попробуйте ещё раз!');
+        console.log(registerResultMessage);
+      }
+    })
+    .catch((e) => console.log(e));
+  }
+
   const [currentUser, setCurrentUser] = React.useState({});
 
   const [location, setLocation] = React.useState(window.location.pathname);
@@ -148,11 +170,8 @@ function App() {
           headerLight={headerLight}
         />
           <Switch>
-            <Route exact path="/">
-              <Main />
-            </Route>
-            <Route path="/movies">
-              <Movies
+            <ProtectedRoute exact path="/" loggedIn={loggedIn} component={Main} />
+            <ProtectedRoute path="/movies" loggedIn={loggedIn} component={Movies} 
                 onMovieSearch={handleMovieSearch}
                 movieInput={movieInput}
                 setMovieInput={setMovieInput}
@@ -165,28 +184,29 @@ function App() {
                 getMovies={getSavedMovies}
                 savedCards={savedCards}
               />
-            </Route>
-            <Route path="/saved-movies">
-              <SavedMovies
-                onShorts={setShorts}
-                getMovies={getSavedMovies}
-                savedCards={savedCards}
-                filteredMovies={filteredSavedCards}
-                onSavedMovieSearch={getSearchedSavedMovies}
-                setMovieInput={setMovieInput}
-                movieInput={movieInput}
-                searchHappened={searchHappened}
-                onNothingFound={nothingFoundMessage}
+            <ProtectedRoute path="/saved-movies" loggedIn={loggedIn} component={SavedMovies} 
+              onShorts={setShorts}
+              getMovies={getSavedMovies}
+              savedCards={savedCards}
+              filteredMovies={filteredSavedCards}
+              onSavedMovieSearch={getSearchedSavedMovies}
+              setMovieInput={setMovieInput}
+              movieInput={movieInput}
+              searchHappened={searchHappened}
+              onNothingFound={nothingFoundMessage}
+            />
+            <ProtectedRoute path="/profile" loggedIn={loggedIn} component={Profile} />
+            <Route path="/signup">
+              <Register 
+                onSignUp={signUp}
+                message={registerResultMessage}
               />
             </Route>
-            <Route path="/profile">
-              <Profile />
-            </Route>
-            <Route path="/signup">
-              <Register />
-            </Route>
             <Route path="/signin">
-              <Login />
+              <Login
+                // onSignIn={signIn}
+                // message={loginResultMessage}
+              />
             </Route>
             <Route path="*">
               <NotFound />
