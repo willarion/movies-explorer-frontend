@@ -82,13 +82,19 @@
   font-size: 10px;
   line-height: 1.2;
   height: 12px;
-  opacity: 1;
+  opacity: 0;
   color: #EE3465;
   transition: opacity .3s;
 }
 
-.login__input-error_visible {
-  opacity: 0;
+.login__general-error_visible {
+  opacity: 1;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.login__input-line:focus+.login__input-error_visible {
+  opacity: 1;
 }
 
 .login__form-btns {

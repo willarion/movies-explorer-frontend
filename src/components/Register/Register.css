@@ -1,6 +1,5 @@
 .register {
   min-height: 700px;
-  height: 100vh;
   box-sizing: border-box;
   padding: 70px 0;
   width: 396px;
@@ -19,7 +18,7 @@
 .register__greeting {
   font-size: 24px;
   line-height: 1.2;
-  margin: 0;
+  margin: 40px 0;
   font-style: normal;
   font-weight: 500;
 }
@@ -163,7 +162,7 @@
   }
 
   .register__greeting {
-    margin-bottom: 40px;
+    margin: 0 0 40px;
   }
 
   .register__form-btns {

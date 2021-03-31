@@ -13,8 +13,6 @@ function Register(props) {
     props.onSignUp(formValidation.values.password, formValidation.values.email, formValidation.values.name);
   }
 
-  console.log(props.message);
-
   return (
     <main className="register">
       <div style={{ backgroundImage: `url(${registerLogo})` }} className="register__logo" />
@@ -37,9 +35,8 @@ function Register(props) {
             <span className="register__input-error register__input-error_visible">{formValidation.errors.password}</span>
           </label>
         </fieldset>
-        
         <div className="register__form-btns">
-        <p className="register__input-error register__general-error_visible">{props.message}</p>
+          <p className="register__input-error register__general-error_visible">{props.message}</p>
           <button className="register__save-btn" type="submit">Зарегистрироваться</button>
           <p className="register__login" type="button">Уже зарегистрированы? <Link to="/signin" className="register__login-btn">Войти</Link></p>
         </div>  

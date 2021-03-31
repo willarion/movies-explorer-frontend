@@ -20,6 +20,7 @@ function App() {
   const history = useHistory();
 
   const [loggedIn, setLoggedIn] = React.useState(true);
+  const [currentUser, setCurrentUser] = React.useState({});
   const [registerResultMessage, setRegisterResultMessage] = React.useState('');
   const [loginResultMessage, setLoginResultMessage] = React.useState('');
 
@@ -37,7 +38,37 @@ function App() {
     .catch((e) => console.log(e));
   }
 
-  const [currentUser, setCurrentUser] = React.useState({});
+  function handleLogin() {
+    setLoggedIn(true);
+  }
+
+  console.log(currentUser);
+
+  function signIn(password, email) {
+    return mainApi.login(password, email)
+    .then((data) => {
+      if (!data) {
+        setLoginResultMessage('Что-то пошло не так! Попробуйте ещё раз!');
+        return;
+      } 
+      if (data.token) {
+
+        mainApi.getUserInfo(data.token)
+          .then((userInfoObject) => {
+            setCurrentUser(userInfoObject);
+          })
+          .catch((err) => {
+            console.log(`Ошибка: ${err}`);
+          });
+
+        handleLogin();
+        history.push('/');
+        
+        return;
+      }
+    })
+    .catch((e) => console.log(e));
+  }
 
   const [location, setLocation] = React.useState(window.location.pathname);
 
@@ -204,8 +235,8 @@ function App() {
             </Route>
             <Route path="/signin">
               <Login
-                // onSignIn={signIn}
-                // message={loginResultMessage}
+                onSignIn={signIn}
+                message={loginResultMessage}
               />
             </Route>
             <Route path="*">
