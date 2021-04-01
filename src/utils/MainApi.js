@@ -120,6 +120,20 @@ class Api {
     })
     .catch(err => console.log(err))
   }; 
+
+  updateUserInfo(userInfoObj, token) {
+    console.log(userInfoObj);
+    return fetch(`${this._baseUrl}/users/me`, {
+      method: 'PATCH',
+      headers: {
+        authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(userInfoObj)
+    })
+    .then(this._handleOriginalResponse);
+  }
+
 }
 
 const mainApi = new Api(mainApiSettings);

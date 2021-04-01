@@ -29,7 +29,7 @@ export function useFormWithValidation() {
   };
 
   const resetForm = React.useCallback(
-    (newValues = {}, newErrors = {}, newIsValid = false) => {
+    (newValues = {name: '', email: '', password: ''}, newErrors = {name: '', email: '', password: ''}, newIsValid = false) => {
       setValues(newValues);
       setErrors(newErrors);
       setIsValid(newIsValid);

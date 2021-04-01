@@ -23,6 +23,7 @@ function App() {
   const [currentUser, setCurrentUser] = React.useState({});
   const [registerResultMessage, setRegisterResultMessage] = React.useState('');
   const [loginResultMessage, setLoginResultMessage] = React.useState('');
+  const [profileUpdateResultMessage, setProfileUpdateResultMessage] = React.useState('');
 
   function signUp(password, email, name) {
     return mainApi.register(password, email, name)
@@ -32,7 +33,6 @@ function App() {
         history.push('/signin');
       } else {
         setRegisterResultMessage('Что-то пошло не так! Попробуйте ещё раз!');
-        console.log(registerResultMessage);
       }
     })
     .catch((e) => console.log(e));
@@ -71,7 +71,8 @@ function App() {
   }
 
   React.useEffect(() => { //tokenCheck
-    const jwt = localStorage.getItem('jwt');
+    // const jwt = localStorage.getItem('jwt');
+    const jwt = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDY2MWM5Mzk3NmMzNTNkMjhjYTQ3ZTUiLCJpYXQiOjE2MTczMDQ3NDQsImV4cCI6MTYxNzkwOTU0NH0.w_us5a9DajNOTmQL-SUEWcYoPo236-5r19RdXDhUG0o';
 
     if (jwt) {
       mainApi.getUserInfo(jwt)
@@ -79,7 +80,6 @@ function App() {
           if (res) {
             setCurrentUser(res);
             handleLogin();
-            history.push('/');
           }
         })
         .catch((err) => {
@@ -87,6 +87,29 @@ function App() {
         });
     } 
   }, [history])
+
+  function signOut() {
+      localStorage.removeItem('jwt');
+      history.push('/signin');
+  }
+
+  function updateProfile(userInfoObj) {
+    // const jwt = localStorage.getItem('jwt');
+    const jwt = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDY2MWM5Mzk3NmMzNTNkMjhjYTQ3ZTUiLCJpYXQiOjE2MTczMDQ3NDQsImV4cCI6MTYxNzkwOTU0NH0.w_us5a9DajNOTmQL-SUEWcYoPo236-5r19RdXDhUG0o';
+    
+        mainApi.updateUserInfo(userInfoObj, jwt)
+        .then((res) => {
+          if (res) {
+            setProfileUpdateResultMessage('');
+            setCurrentUser(res);
+          } else {
+            setProfileUpdateResultMessage('Что-то пошло не так! Попробуйте ещё раз!');
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      }
 
   const [location, setLocation] = React.useState(window.location.pathname);
 
@@ -183,13 +206,13 @@ function App() {
     }
   }, [filteredMovies]);
 
-  const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDVjZGY4Mjk3NmMzNTNkMjhjYTQ3OWIiLCJpYXQiOjE2MTY2OTkzMDYsImV4cCI6MTYxNzMwNDEwNn0.mJFt9Qfa9i-5k7eVXxD8By4_l5Wi6AKA2W7OB5ETddg';
-
   const [savedCards, setSavedCards] = React.useState([]);
   const [filteredSavedCards, setFilteredSavedCards] = React.useState([]);
 
-  function getSavedMovies(token) { // сохраненные фильмы 
-    mainApi.getMovies(token)
+  function getSavedMovies() { // сохраненные фильмы 
+    const jwt = localStorage.getItem('jwt');
+
+    mainApi.getMovies(jwt)
       .then((res) => {
         setSavedCards(res);
       })
@@ -199,7 +222,9 @@ function App() {
   }
 
   React.useEffect(() => { // обновление сохраненных фильмов
-    getSavedMovies(token);
+    const jwt = localStorage.getItem('jwt');
+    
+    getSavedMovies(jwt);
   }, []); 
 
   function getSearchedSavedMovies() {
@@ -244,7 +269,11 @@ function App() {
               searchHappened={searchHappened}
               onNothingFound={nothingFoundMessage}
             />
-            <ProtectedRoute path="/profile" loggedIn={loggedIn} component={Profile} />
+            <ProtectedRoute path="/profile" loggedIn={loggedIn} component={Profile}
+              onProfileUpdate={updateProfile}
+              onSignOut={signOut}
+              message={profileUpdateResultMessage}
+            />
             <Route path="/signup">
               <Register 
                 onSignUp={signUp}

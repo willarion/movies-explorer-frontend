@@ -11,13 +11,15 @@ function Register(props) {
     e.preventDefault();
 
     props.onSignUp(formValidation.values.password, formValidation.values.email, formValidation.values.name);
+
+    formValidation.resetForm();
   }
 
   return (
     <main className="register">
       <div style={{ backgroundImage: `url(${registerLogo})` }} className="register__logo" />
       <p className="register__greeting">Добро пожаловать!</p>
-      <form action="#" className="register__form" onSubmit={handleSubmit}>
+      <form action="#" className="register__form" onSubmit={handleSubmit} noValidate>
         <fieldset className="register__form-fields">
           <label className="register__input-field" htmlFor="name">
             Имя

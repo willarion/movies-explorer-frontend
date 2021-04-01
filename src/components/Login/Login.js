@@ -11,13 +11,15 @@ function Login(props) {
     e.preventDefault();
 
     props.onSignIn(formValidation.values.password, formValidation.values.email);
+    
+    formValidation.resetForm();
   }
 
   return (
     <main className="login">
       <div style={{ backgroundImage: `url(${loginLogo})` }} className="login__logo" />
       <p className="login__greeting">Рады видеть!</p>
-      <form action="#" className="login__form" onSubmit={handleSubmit}>
+      <form action="#" className="login__form" onSubmit={handleSubmit} noValidate>
         <fieldset className="login__form-fields">
           <label className="login__input-field" htmlFor="email">
             E-mail
