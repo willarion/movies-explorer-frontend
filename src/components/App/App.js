@@ -70,6 +70,24 @@ function App() {
     .catch((e) => console.log(e));
   }
 
+  React.useEffect(() => { //tokenCheck
+    const jwt = localStorage.getItem('jwt');
+
+    if (jwt) {
+      mainApi.getUserInfo(jwt)
+        .then((res) => {
+          if (res) {
+            setCurrentUser(res);
+            handleLogin();
+            history.push('/');
+          }
+        })
+        .catch((err) => {
+          console.log(`Ошибка: ${err}`);
+        });
+    } 
+  }, [history])
+
   const [location, setLocation] = React.useState(window.location.pathname);
 
   const loc = useLocation();
