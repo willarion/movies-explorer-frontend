@@ -32,7 +32,7 @@ function Login(props) {
         </fieldset>
         <div className="login__form-btns">
           <p className="login__input-error login__general-error_visible">{props.message}</p>
-          <button className="login__save-btn" type="submit">Войти</button>
+          <button className={ !formValidation.isValid ? "login__save-btn login__save-btn_disabled" : "login__save-btn" } type="submit">Войти</button>
           <p className="login__register" type="button">Ещё не зарегистрированы? <Link to="/signup" className="login__login-btn">Регистрация</Link></p>
         </div>  
       </form>

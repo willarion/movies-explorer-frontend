@@ -127,6 +127,11 @@
   color: #C2C2C2;
 }
 
+.register__save-btn_disabled:hover {
+  opacity: 1;
+  cursor: default;
+}
+
 .register__login {
   margin: 16px 0 0;
   font-style: normal;
@@ -139,7 +144,7 @@
 
 .register__login-btn {
   text-decoration: none;
-  color: #2BE080;
+  color: #4b7c62;
   transition: opacity .3s;
 }
 

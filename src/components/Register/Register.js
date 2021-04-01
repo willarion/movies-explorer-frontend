@@ -37,7 +37,7 @@ function Register(props) {
         </fieldset>
         <div className="register__form-btns">
           <p className="register__input-error register__general-error_visible">{props.message}</p>
-          <button className="register__save-btn" type="submit">Зарегистрироваться</button>
+          <button className={ !formValidation.isValid ? "register__save-btn register__save-btn_disabled" : "register__save-btn" }type="submit" disabled={!formValidation.isValid}>Зарегистрироваться</button>
           <p className="register__login" type="button">Уже зарегистрированы? <Link to="/signin" className="register__login-btn">Войти</Link></p>
         </div>  
       </form>
@@ -46,3 +46,4 @@ function Register(props) {
 }
 
 export default Register;
+ 
