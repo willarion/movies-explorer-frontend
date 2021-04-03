@@ -56,7 +56,7 @@ function Profile(props) {
           </label>
           <label className="profile__input-field" htmlFor="email">
             Почта
-            <input type="email" name="email" className="profile__input-line" id="input-email" required="" minLength="2" maxLength="20" required value={emailChangeHappened ? formValidation.values.email : (currentUser.email ? currentUser.email : '')} readOnly={readOnly} onChange={handleEmailChange} />
+            <input type="email" name="email" className="profile__input-line" id="input-email" required="" minLength="2" maxLength="30" required value={emailChangeHappened ? formValidation.values.email : (currentUser.email ? currentUser.email : '')} readOnly={readOnly} onChange={handleEmailChange} />
             <span className="profile__input-error" id="input-email-error">{formValidation.errors.email}</span>
           </label>
         </fieldset>

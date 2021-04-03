@@ -21,7 +21,7 @@ function Login(props) {
         <fieldset className="login__form-fields">
           <label className="login__input-field" htmlFor="email">
             E-mail
-            <input type="email" name="email" className="login__input-line" id="input-email" required="" minLength="2" maxLength="20" value={formValidation.values.email} onChange={formValidation.handleChange} />
+            <input type="email" name="email" className="login__input-line" id="input-email" required="" minLength="2" maxLength="30" value={formValidation.values.email} onChange={formValidation.handleChange} />
             <span className="login__input-error login__input-error_visible">{formValidation.errors.email}</span>
           </label>
           <label className="login__input-field" htmlFor="password">

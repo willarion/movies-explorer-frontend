@@ -3,7 +3,7 @@ const movieApiSettings = {
 }
 
 const mainApiSettings = {
-  baseUrl: 'http://api.movies.willarion.students.nomoredomains.monster',
+  baseUrl: 'https://api.movies.willarion.students.nomoredomains.monster',
 }
 
 export { movieApiSettings, mainApiSettings };
