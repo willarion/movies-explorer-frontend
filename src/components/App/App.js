@@ -73,6 +73,8 @@ function App() {
     .catch((e) => console.log(e));
   }
 
+  console.log(loggedIn);
+
   React.useEffect(() => { //token check
     const jwt = localStorage.getItem('jwt');
 
@@ -82,13 +84,13 @@ function App() {
           if (res) {
             setCurrentUser(res);
             handleLogin();
-          }
+          } 
         })
         .catch((err) => {
           console.log(`Ошибка: ${err}`);
         });
     } 
-  }, [history])
+  }, []);
 
   function signOut() {
       localStorage.removeItem('jwt');
@@ -212,22 +214,17 @@ function App() {
   const [filteredSavedCards, setFilteredSavedCards] = React.useState([]);
 
   function getSavedMovies() { // сохраненные фильмы 
-    const jwt = localStorage.getItem('jwt');
-
-    mainApi.getMovies(jwt)
-      .then((res) => {
-        setSavedCards(res);
-      })
-      .catch((err) => {
-        console.log(`Ошибка: ${err}`);
-      });
+    if (loggedIn) {
+      const jwt = localStorage.getItem('jwt');
+      mainApi.getMovies(jwt)
+        .then((res) => {
+          setSavedCards(res);
+        })
+        .catch((err) => {
+          console.log(`Ошибка: ${err}`);
+        });
+    }
   }
-
-  React.useEffect(() => { // обновление сохраненных фильмов
-    const jwt = localStorage.getItem('jwt');
-    
-    getSavedMovies(jwt);
-  }, []); 
 
   function getSearchedSavedMovies() {
       setSearchHappened(true);
@@ -248,7 +245,7 @@ function App() {
         />
           <Switch>
             <Route exact path="/">
-              <Main loggedIn={loggedIn} />
+              <Main />
             </Route>  
             <ProtectedRoute path="/movies" loggedIn={loggedIn} component={Movies} 
                 onMovieSearch={handleMovieSearch}

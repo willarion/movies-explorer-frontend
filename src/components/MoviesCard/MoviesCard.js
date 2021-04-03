@@ -5,13 +5,9 @@ import {movieApiSettings} from '../../utils/constants';
 
 
 function MoviesCard (props) {
-  //temporary token
-  const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDVjZGY4Mjk3NmMzNTNkMjhjYTQ3OWIiLCJpYXQiOjE2MTY2OTkzMDYsImV4cCI6MTYxNzMwNDEwNn0.mJFt9Qfa9i-5k7eVXxD8By4_l5Wi6AKA2W7OB5ETddg';
-
   const likeBtn = props.likeBtn ? 'movies-card__btn_state_like' : '';
   const deleteBtn = props.deleteBtn ? 'movies-card__btn_state_delete' : '';
 
-  const currentUser = React.useContext(CurrentUserContext);
   const [src, setSrc] = React.useState('');
   const isLiked = props.savedCards.some((savedMovie) => savedMovie.description === props.card.description);
   const [likeStatus, setLikeStatus] = React.useState(false);
@@ -39,6 +35,7 @@ function MoviesCard (props) {
 
   function handleBtnClick(e) {
     e.stopPropagation();
+    const token = localStorage.getItem('jwt');
 
     if (likeBtn) {
       const card = {
