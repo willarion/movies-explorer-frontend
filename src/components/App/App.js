@@ -19,7 +19,7 @@ function App() {
 
   const history = useHistory();
 
-  const [loggedIn, setLoggedIn] = React.useState(true);
+  const [loggedIn, setLoggedIn] = React.useState(false);
   const [currentUser, setCurrentUser] = React.useState({});
   const [registerResultMessage, setRegisterResultMessage] = React.useState('');
   const [loginResultMessage, setLoginResultMessage] = React.useState('');
@@ -73,7 +73,7 @@ function App() {
     .catch((e) => console.log(e));
   }
 
-  React.useEffect(() => { //tokenCheck
+  React.useEffect(() => { //token check
     const jwt = localStorage.getItem('jwt');
 
     if (jwt) {
@@ -93,6 +93,7 @@ function App() {
   function signOut() {
       localStorage.removeItem('jwt');
       history.push('/signin');
+      setLoggedIn(false);
   }
 
   function updateProfile(userInfoObj) {
@@ -243,9 +244,12 @@ function App() {
           visibleNavigation={visibleNavigation}
           headerVisibility={headerVisibility}
           headerLight={headerLight}
+          loggedIn={loggedIn}
         />
           <Switch>
-            <ProtectedRoute exact path="/" loggedIn={loggedIn} component={Main} />
+            <Route exact path="/">
+              <Main loggedIn={loggedIn} />
+            </Route>  
             <ProtectedRoute path="/movies" loggedIn={loggedIn} component={Movies} 
                 onMovieSearch={handleMovieSearch}
                 movieInput={movieInput}

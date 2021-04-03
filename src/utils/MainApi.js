@@ -122,7 +122,6 @@ class Api {
   }; 
 
   updateUserInfo(userInfoObj, token) {
-    console.log(userInfoObj);
     return fetch(`${this._baseUrl}/users/me`, {
       method: 'PATCH',
       headers: {

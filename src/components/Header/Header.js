@@ -11,7 +11,11 @@ function Header (props) {
   return (
     <header className={ headerClasses }>
       <Link to="/" style={{ backgroundImage: `url(${headerLogo})` }} className="header__logo" />
-      <Navigation toggleClass={props.toggleClass} visibleNavigation={props.visibleNavigation} headerLight={props.headerLight} />
+      <Navigation 
+        toggleClass={props.toggleClass} 
+        visibleNavigation={props.visibleNavigation} headerLight={props.headerLight} 
+        loggedIn={props.loggedIn}
+      />
     </header>
   )
 }
