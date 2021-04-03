@@ -73,10 +73,9 @@ function App() {
     .catch((e) => console.log(e));
   }
 
-  console.log(loggedIn);
-
   React.useEffect(() => { //token check
     const jwt = localStorage.getItem('jwt');
+    const path = loc.pathname;
 
     if (jwt) {
       mainApi.getUserInfo(jwt)
@@ -84,6 +83,7 @@ function App() {
           if (res) {
             setCurrentUser(res);
             handleLogin();
+            history.push(path);
           } 
         })
         .catch((err) => {

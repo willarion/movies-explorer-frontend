@@ -45,7 +45,7 @@ function MoviesCardList (props) {
   }, [])
 
   React.useEffect(() => {
-    if (moviesToRender.length >= 3 && !(moviesToRender.length === amountToRender && amountToRender !== 0)) {
+    if (moviesToRender.length >= 3 && (moviesToRender.length > amountToRender && amountToRender !== 0)) {
       setMoreBtn(true);
     } else {
       setMoreBtn(false);
