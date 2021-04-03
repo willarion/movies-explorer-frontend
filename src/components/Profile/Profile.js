@@ -43,8 +43,6 @@ function Profile(props) {
     setNameChangeHappened(false);
   }
 
-  console.log(!formValidation.isValid);
-
   return (
     <main className="profile">
       <p className="profile__greeting">Привет, {currentUser.name}!</p>

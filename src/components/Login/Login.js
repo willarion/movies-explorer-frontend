@@ -10,9 +10,7 @@ function Login(props) {
   function handleSubmit(e) {
     e.preventDefault();
 
-    props.onSignIn(formValidation.values.password, formValidation.values.email);
-    
-    formValidation.resetForm();
+    props.onSignIn(formValidation.values.password, formValidation.values.email, formValidation.resetForm);
   }
 
   return (

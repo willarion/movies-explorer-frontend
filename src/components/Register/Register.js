@@ -10,9 +10,7 @@ function Register(props) {
   function handleSubmit(e) {
     e.preventDefault();
 
-    props.onSignUp(formValidation.values.password, formValidation.values.email, formValidation.values.name);
-
-    formValidation.resetForm();
+    props.onSignUp(formValidation.values.password, formValidation.values.email, formValidation.values.name, formValidation.resetForm);
   }
 
   return (

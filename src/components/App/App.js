@@ -25,26 +25,28 @@ function App() {
   const [loginResultMessage, setLoginResultMessage] = React.useState('');
   const [profileUpdateResultMessage, setProfileUpdateResultMessage] = React.useState('');
 
-  function signUp(password, email, name) {
+  function signUp(password, email, name, resetForm) {
     return mainApi.register(password, email, name)
     .then((res) => {
       if (res) {
         setRegisterResultMessage('');
+        resetForm();
         history.push('/signin');
       } else {
         setRegisterResultMessage('Что-то пошло не так! Попробуйте ещё раз!');
       }
     })
-    .catch((e) => console.log(e));
+    .catch((e) => {
+      console.log(e);
+      setRegisterResultMessage('Что-то пошло не так! Попробуйте ещё раз!');
+    });
   }
 
   function handleLogin() {
     setLoggedIn(true);
   }
 
-  console.log(currentUser);
-
-  function signIn(password, email) {
+  function signIn(password, email, resetForm) {
     return mainApi.login(password, email)
     .then((data) => {
       if (!data) {
@@ -62,6 +64,7 @@ function App() {
           });
 
         handleLogin();
+        resetForm();
         history.push('/');
         
         return;
@@ -71,8 +74,7 @@ function App() {
   }
 
   React.useEffect(() => { //tokenCheck
-    // const jwt = localStorage.getItem('jwt');
-    const jwt = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDY2MWM5Mzk3NmMzNTNkMjhjYTQ3ZTUiLCJpYXQiOjE2MTczMDQ3NDQsImV4cCI6MTYxNzkwOTU0NH0.w_us5a9DajNOTmQL-SUEWcYoPo236-5r19RdXDhUG0o';
+    const jwt = localStorage.getItem('jwt');
 
     if (jwt) {
       mainApi.getUserInfo(jwt)
@@ -94,8 +96,7 @@ function App() {
   }
 
   function updateProfile(userInfoObj) {
-    // const jwt = localStorage.getItem('jwt');
-    const jwt = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDY2MWM5Mzk3NmMzNTNkMjhjYTQ3ZTUiLCJpYXQiOjE2MTczMDQ3NDQsImV4cCI6MTYxNzkwOTU0NH0.w_us5a9DajNOTmQL-SUEWcYoPo236-5r19RdXDhUG0o';
+    const jwt = localStorage.getItem('jwt');
     
         mainApi.updateUserInfo(userInfoObj, jwt)
         .then((res) => {
