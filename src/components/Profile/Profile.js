@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import {useFormWithValidation} from '../../utils/FormValidation';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 

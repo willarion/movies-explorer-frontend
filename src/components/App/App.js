@@ -106,6 +106,7 @@ function App() {
           if (res) {
             setProfileUpdateResultMessage('');
             setCurrentUser(res);
+            setProfileUpdateResultMessage('Информация обновлена!');
           } else {
             setProfileUpdateResultMessage('Что-то пошло не так! Попробуйте ещё раз!');
           }

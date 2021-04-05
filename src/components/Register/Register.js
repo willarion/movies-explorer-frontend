@@ -13,8 +13,6 @@ function Register(props) {
     props.onSignUp(formValidation.values.password, formValidation.values.email, formValidation.values.name, formValidation.resetForm);
   }
 
-  console.log(!formValidation.isValid);
-
   return (
     <main className="register">
       <div style={{ backgroundImage: `url(${registerLogo})` }} className="register__logo" />
