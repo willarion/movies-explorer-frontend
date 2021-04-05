@@ -13,6 +13,8 @@ function Register(props) {
     props.onSignUp(formValidation.values.password, formValidation.values.email, formValidation.values.name, formValidation.resetForm);
   }
 
+  console.log(!formValidation.isValid);
+
   return (
     <main className="register">
       <div style={{ backgroundImage: `url(${registerLogo})` }} className="register__logo" />
@@ -21,17 +23,17 @@ function Register(props) {
         <fieldset className="register__form-fields">
           <label className="register__input-field" htmlFor="name">
             Имя
-            <input className="register__input-line" id="input-name" type="text" name="name" required="" minLength="2" maxLength="40" value={formValidation.values.name} onChange={formValidation.handleChange} />
+            <input className="register__input-line" id="input-name" type="text" name="name" required minLength="2" maxLength="40" value={formValidation.values.name} onChange={formValidation.handleChange} />
             <span className="register__input-error register__input-error_visible">{formValidation.errors.name}</span>
           </label>
           <label className="register__input-field" htmlFor="email">
             E-mail
-            <input type="email" name="email" className="register__input-line" id="input-email" required="" minLength="2" maxLength="30" value={formValidation.values.email} onChange={formValidation.handleChange} />
+            <input type="email" name="email" className="register__input-line" id="input-email" required minLength="2" maxLength="30" value={formValidation.values.email} onChange={formValidation.handleChange} />
             <span className="register__input-error register__input-error_visible">{formValidation.errors.email}</span>
           </label>
           <label className="register__input-field" htmlFor="password">
             Пароль
-            <input type="password" name="password" className="register__input-line" id="input-password" required="" minLength="8" value={formValidation.values.password} onChange={formValidation.handleChange} />
+            <input type="password" name="password" className="register__input-line" id="input-password" required minLength="8" value={formValidation.values.password} onChange={formValidation.handleChange} />
             <span className="register__input-error register__input-error_visible">{formValidation.errors.password}</span>
           </label>
         </fieldset>
