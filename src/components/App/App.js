@@ -25,7 +25,11 @@ function App() {
   const [loginResultMessage, setLoginResultMessage] = React.useState('');
   const [profileUpdateResultMessage, setProfileUpdateResultMessage] = React.useState('');
 
+  const [readOnly, setReadOnly] = React.useState(false);
+
+
   function signUp(password, email, name, resetForm) {
+    setReadOnly(true);
     return mainApi.register(password, email, name)
     .then((res) => {
       if (res) {
@@ -39,7 +43,8 @@ function App() {
     .catch((e) => {
       console.log(e);
       setRegisterResultMessage('Что-то пошло не так! Попробуйте ещё раз!');
-    });
+    })
+    .finally(() => setReadOnly(false));
   }
 
   function handleLogin() {
@@ -47,6 +52,8 @@ function App() {
   }
 
   function signIn(password, email, resetForm) {
+    setReadOnly(true);
+
     return mainApi.login(password, email)
     .then((data) => {
       if (!data) {
@@ -70,7 +77,8 @@ function App() {
         return;
       }
     })
-    .catch((e) => console.log(e));
+    .catch((e) => console.log(e))
+    .finally(() => setReadOnly(false));
   }
 
   React.useEffect(() => { //token check
@@ -294,12 +302,14 @@ function App() {
               <Register 
                 onSignUp={signUp}
                 message={registerResultMessage}
+                readOnly={readOnly}
               />
             </Route>
             <Route path="/signin">
               <Login
                 onSignIn={signIn}
                 message={loginResultMessage}
+                readOnly={readOnly}
               />
             </Route>
             <Route path="*">

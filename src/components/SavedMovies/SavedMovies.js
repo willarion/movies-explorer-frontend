@@ -6,7 +6,6 @@ function SavedMovies (props) {
 
   React.useEffect(() => { // обновление сохраненных фильмов
     props.getMovies();
-    console.log('useeff');
   }, []); 
 
   const movies = props.searchHappened ? props.filteredMovies : props.savedCards;
