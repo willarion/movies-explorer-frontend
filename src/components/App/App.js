@@ -65,7 +65,7 @@ function App() {
 
         handleLogin();
         resetForm();
-        history.push('/');
+        history.push('/movies');
         
         return;
       }
@@ -94,6 +94,7 @@ function App() {
 
   function signOut() {
       localStorage.removeItem('jwt');
+      localStorage.removeItem('movies');
       history.push('/signin');
       setLoggedIn(false);
   }
@@ -163,11 +164,18 @@ function App() {
   // поиск фильмов (по внешнему АПИ)
   const [movieInput, setMovieInput] = React.useState('');
   const [shorts, setShorts] = React.useState(false);
+  const [allMoviesList, setAllMoviesList] = React.useState([]);
   const [filteredMovies, setFilteredMovies] = React.useState([]);
   const [loader, setLoader] = React.useState(false);
   const [nothingFoundMessage, setNothingFoundMessage] = React.useState(false);
   const [errorHappenedMessage, setErrorHappenedMessage] = React.useState(false);
   const [searchHappened, setSearchHappened] = React.useState(false);
+
+  React.useEffect(() => {
+    if (movieInput !== '') {
+      setMovieInput('');
+    }
+  }, [loc.pathname]);
 
   function renderLoading(isLoading) {  
     if (isLoading) {
@@ -187,10 +195,8 @@ function App() {
 
   function getSearchedMovies() {
     moviesApi.getMovieList()
-    .then((res) => {
-      const newMoviesArray = filterMovies(shorts, res, movieInput);
-      setFilteredMovies(newMoviesArray);
-      alertNothingFound(newMoviesArray);
+    .then((allMovies) => {
+      setAllMoviesList(allMovies);
     })
     .catch((err) => {
       setErrorHappenedMessage(true);
@@ -202,7 +208,15 @@ function App() {
   function handleMovieSearch() {
     renderLoading(true);
     setSearchHappened(true);
-    getSearchedMovies();
+
+    if (allMoviesList.length === 0) {
+      getSearchedMovies();
+    }
+    const filteredArray = filterMovies(shorts, allMoviesList, movieInput);
+    setFilteredMovies(filteredArray);
+    alertNothingFound(filteredArray);
+
+    renderLoading(false);
   }
 
   React.useEffect(() => {

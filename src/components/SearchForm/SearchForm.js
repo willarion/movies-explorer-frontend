@@ -1,6 +1,7 @@
 import React from 'react';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 
+
 function SearchForm(props) {
 
   const [errorMessage, setErrorMessage] = React.useState('');

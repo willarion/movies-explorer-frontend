@@ -1,5 +1,4 @@
 import React from 'react';
-import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import mainApi from '../../utils/MainApi';
 import {movieApiSettings} from '../../utils/constants';
 
@@ -67,7 +66,6 @@ function MoviesCard (props) {
 
         // ОПРЕДЕЛИТЬ ID 
         const movieId = props.savedCards.find((savedMovie) => savedMovie.description === props.card.description)._id;
-        console.log(movieId);
 
         mainApi.changeMovieLikeStatus({token, movieId, isLiked: true})
           .then(() => {

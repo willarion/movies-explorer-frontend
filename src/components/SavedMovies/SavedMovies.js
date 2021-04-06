@@ -5,9 +5,7 @@ import SearchForm from '../SearchForm/SearchForm'
 function SavedMovies (props) {
 
   React.useEffect(() => { // обновление сохраненных фильмов
-    const jwt = localStorage.getItem('jwt');
-    
-    props.getMovies(jwt);
+    props.getMovies();
   }, []); 
 
   const movies = props.searchHappened ? props.filteredMovies : props.savedCards;
