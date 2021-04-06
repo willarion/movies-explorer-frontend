@@ -2,17 +2,39 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 
 function Navigation (props) {
-
   const loggedIn = props.loggedIn;
 
   const linksColor = props.headerLight ? 'navigation__link navigation__link_black' : 'navigation__link';
-  const visibleNavigation = props.visibleNavigation;
   const headerLight = props.headerLight;
+
+  const [visibleNavigation, setNavigationVisibility] = React.useState(false);
+
+  function toggleClass() {
+    const currentVisibility = visibleNavigation;
+    setNavigationVisibility(!currentVisibility);
+  }
+
+  const popupToClose = React.useRef();
+
+  const handleClick = e => {
+    if (popupToClose.current.contains(e.target)) {
+      return;
+    }
+    setNavigationVisibility(false);
+  };
+
+  React.useEffect(() => {
+    document.addEventListener("click", handleClick);
+
+    return () => {
+      document.removeEventListener("click", handleClick);
+    };
+  }, []);
 
 
   return (
-    <>
-      <div className={loggedIn ? "navigation__burger navigation__burger_visible" : "navigation__burger"} onClick={props.toggleClass}>
+    <div ref={popupToClose}> 
+      <div className={loggedIn ? "navigation__burger navigation__burger_visible" : "navigation__burger"} onClick={toggleClass}>
         <label htmlFor="burger" 
         className={visibleNavigation ? "navigation__burger-main-line navigation__burger-main-line_checked" : "navigation__burger-main-line"} 
         />
@@ -65,7 +87,7 @@ function Navigation (props) {
           </li>
         </ul>
       </nav>
-    </>
+    </div>
   )
 }
 

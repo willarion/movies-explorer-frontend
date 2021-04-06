@@ -160,15 +160,6 @@ function App() {
     }
   }, [location]);
 
-  // видимость навигации
-  const [visibleNavigation, setNavigationVisibility] = React.useState(false);
-
-  function toggleClass() {
-    const currentVisibility = visibleNavigation;
-    setNavigationVisibility(!currentVisibility);
-  }
-
-
   // поиск фильмов (по внешнему АПИ)
   const [movieInput, setMovieInput] = React.useState('');
   const [shorts, setShorts] = React.useState(false);
@@ -259,8 +250,6 @@ function App() {
     <>
       <CurrentUserContext.Provider value={currentUser}>
         <Header 
-          toggleClass={toggleClass} 
-          visibleNavigation={visibleNavigation}
           headerVisibility={headerVisibility}
           headerLight={headerLight}
           loggedIn={loggedIn}
