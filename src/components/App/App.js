@@ -207,8 +207,7 @@ function App() {
 
   function handleMovieSearch() {
     renderLoading(true);
-    setSearchHappened(true);
-
+    
     if (allMoviesList.length === 0) {
       getSearchedMovies();
     }
