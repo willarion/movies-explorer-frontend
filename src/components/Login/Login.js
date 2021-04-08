@@ -25,15 +25,15 @@ function Login(props) {
             <span className="login__input-error login__input-error_visible">{formValidation.errors.email}</span>
           </label>
           <label className="login__input-field" htmlFor="password">
-            Пароль
+            Password
             <input type="password" name="password" className="login__input-line" id="input-password" required minLength="8"value={formValidation.values.password} onChange={formValidation.handleChange} readOnly={props.readOnly} />
             <span className="login__input-error login__input-error_visible">{formValidation.errors.password}</span>
           </label>
         </fieldset>
         <div className="login__form-btns">
           <p className="login__input-error login__general-error_visible">{props.message}</p>
-          <button className={ !formValidation.isValid ? "login__save-btn login__save-btn_disabled" : "login__save-btn" } type="submit">Войти</button>
-          <p className="login__register" type="button">Ещё не зарегистрированы? <Link to="/signup" className="login__login-btn">Регистрация</Link></p>
+          <button className={ !formValidation.isValid ? "login__save-btn login__save-btn_disabled" : "login__save-btn" } type="submit">Sign in</button>
+          <p className="login__register" type="button">Don't have account? <Link to="/signup" className="login__login-btn">Sign up</Link></p>
         </div>  
       </form>
     </main>

@@ -20,6 +20,18 @@
   letter-spacing: -0.04em;
 }
 
+.promo__subheading {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 1.2;
+  color: #fff;
+  max-width: 626px;
+  margin: 0;
+  letter-spacing: -0.04em;
+}
+
 .promo__decoration {
   background-image: url(../../images/promo-decoration.svg);
   width: 722px;

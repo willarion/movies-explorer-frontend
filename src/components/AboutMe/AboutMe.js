@@ -9,9 +9,11 @@ function AboutMe(props) {
       <h2 className="about-me__heading">Студентка</h2>
       <div className="about-me__container">
         <div className="about-me-text">
-          <p className="about-me-text-heading">Марина</p>
-          <p className="about-me-text-subheading">Front-end developer</p>
-          <p className="about-me-text-bio">Я из Минска, Беларусь. Закончила в 2019 Европейский гуманитарный университет и получила степерь магистра в международной праве. В 2020 году решила войти в IT и начала курсы от Яндекс.Практикума. Это мой дипломный проект.</p>
+          <p className="about-me-text-heading">Marina Anisimova</p>
+          <p className="about-me-text-subheading">junior front-end developer</p>
+          <p className="about-me-text-bio">
+            I'm originally from Minsk, Belarus. In 2019 I graduated from EHU in Vilnius, Lithuania, with a master's degree in international law. In 2020 I decided to change my career and entered courses of Yandex.Praktikum. And this website is my final project. 
+          </p>
           <ul className="about-me__links">
             <li className="about-me__link-item">
               <a className="about-me__link" onClick={() => openInNewTab("https://www.linkedin.com/in/willarion/")}>Linkedin</a>
@@ -21,7 +23,7 @@ function AboutMe(props) {
             </li>
           </ul>
         </div>
-        <img alt="портрет" src={portrait} className="about-me-portrait" />
+        <img alt="portrait" src={portrait} className="about-me-portrait" />
       </div>
     </section>
   )

@@ -44,7 +44,7 @@ function Navigation (props) {
           to="/profile" 
           className={ loggedIn ? "navigation__account navigation__link navigation__link-item_sided" : "navigation__link_invisible"}
         >
-          Аккаунт
+          Account
           <div className="navigation__account-icon" />
         </NavLink>
         <NavLink to="/signin">
@@ -57,7 +57,7 @@ function Navigation (props) {
               activeClassName={headerLight ? 'navigation__link_current navigation__link_current_black' : 'navigation__link_current'}
               className={loggedIn ? "navigation__link navigation__link_sided" : "navigation__link_invisible"}
             >
-              Главная
+              Main
             </NavLink> 
           </li>
           <li className={loggedIn ? "navigation__link-item navigation__link-item_sided" :  "navigation__link-item"}>
@@ -66,7 +66,7 @@ function Navigation (props) {
               activeClassName={headerLight ? 'navigation__link_current navigation__link_current_black' : 'navigation__link_current'}
               className={loggedIn ? (visibleNavigation ? linksColor + " navigation__link_sided" : `${linksColor}` ) : "navigation__link_invisible"}
             >
-              Фильмы
+              Movies
             </NavLink>
           </li>
           <li className={loggedIn ? "navigation__link-item navigation__link-item_sided" :  "navigation__link-item"}>
@@ -75,14 +75,14 @@ function Navigation (props) {
               activeClassName={headerLight ? 'navigation__link_current navigation__link_current_black' : 'navigation__link_current'}
               className={loggedIn ? (visibleNavigation ? linksColor + " navigation__link_sided" : `${linksColor}` ) : "navigation__link_invisible"}
             >
-              Сохраненные Фильмы
+              Saved-movies
             </NavLink>
           </li>
           <li className={loggedIn ? "navigation__link-item navigation__link-item_sided" :  "navigation__link-item"}>
             <NavLink 
               to="/signup"
               className={loggedIn ? "navigation__link_invisible" : "navigation__link"}>
-              Регистрация
+              Sign up
             </NavLink>
           </li>
         </ul>

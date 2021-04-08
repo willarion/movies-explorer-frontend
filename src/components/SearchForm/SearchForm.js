@@ -10,7 +10,7 @@ function SearchForm(props) {
     const value = e.target.value;
 
     if (value === undefined || value.trim() === '') {
-      setErrorMessage('Нужно ввести ключевое слово');
+      setErrorMessage('You need to enter a keyword (in Russian)');
       props.setMovieInput('');
 
     } else {
@@ -24,7 +24,7 @@ function SearchForm(props) {
     if (props.movieInput) {
       props.onMovieSearch();
     } else {
-      console.log('нечего искать');
+      console.log('nothing to search');
       return;
     }
   }
@@ -33,7 +33,7 @@ function SearchForm(props) {
     <form className="search-form" onSubmit={handleSubmit} noValidate>
       <div className="search-form__input-container">
         <div className="search-form__illustration" />
-        <input className="search-form__input" placeholder="Фильм" value={props.movieInput} onChange={handleMovieChange} required />
+        <input className="search-form__input" placeholder="Movie?" value={props.movieInput} onChange={handleMovieChange} required />
         <button className="search-form__btn" type="submit" />
       </div>
       <p className="search-form__error">{errorMessage}</p>
