@@ -54,14 +54,19 @@
   transition: color .3s ease-in 0s;
   font-size: 14px;
   line-height: 1.28;
-}
-
-.filter-checkbox__initial-picture:checked+.filter-checkbox__label{
   color: rgba(1, 1, 1, 0.1);
 }
 
+.filter-checkbox__label:hover {
+  color: rgba(1, 1, 1, 0.4);
+}
+
+.filter-checkbox__initial-picture:checked+.filter-checkbox__label{
+  color: #000;
+}
+
 .filter-checkbox:hover .filter-checkbox__initial-picture:checked+.filter-checkbox__label {
-  color: rgba(1, 1, 1, 0.3);
+  color: rgba(1, 1, 1, 0.6);
 }
 
 .filter-checkbox__label::before {
@@ -75,7 +80,7 @@
   left: -48px;
 }
 
-.filter-checkbox__initial-picture+.filter-checkbox__label::after { /* кружочек справа*/
+.filter-checkbox__initial-picture:checked+.filter-checkbox__label::after { /* кружочек справа*/
   content: '';
   position: absolute;
   background: #2BE080;
@@ -88,7 +93,7 @@
   animation: unchecked .3s ease-out 0s 1 normal forwards;
 }
 
-.filter-checkbox__initial-picture:checked+.filter-checkbox__label::after { /* кружочек слева*/
+.filter-checkbox__initial-picture+.filter-checkbox__label::after { /* кружочек слева*/
   content: '';
   position: absolute;
   background: #F5F5F5;

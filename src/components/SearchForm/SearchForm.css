@@ -4,6 +4,7 @@
   padding: 70px 70px 48px;
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 
 .search-form__input-container {
@@ -76,6 +77,20 @@
   opacity: .6;
   cursor: pointer;
 }
+
+.search-form__error {
+  margin: 10px 0 0;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 10px;
+  line-height: 1.2;
+  height: 12px;
+  color: #EE3465;
+  position: absolute;
+  bottom: 75px;
+  left: 105px;
+}
+
 
 @media screen and (max-width: 768px) {
   .search-form {

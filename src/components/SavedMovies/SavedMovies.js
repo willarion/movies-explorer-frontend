@@ -3,34 +3,31 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import SearchForm from '../SearchForm/SearchForm'
 
 function SavedMovies (props) {
-  const disabledBtn = "movies-card-list__btn_disabled";
-  const deleteFilmBtn = "movies-card__btn_state_delete"
 
-  const cards = [ // temporary data 
-    {
-      _id: 1,
-      name: 'sfdf',
-      duration: 111,
-      image: 'https://poster.nicefon.ru/2018_03/13/1080x610/2086154521359db595d245.jpg',
-    },
-    {
-      _id: 21,
-      name: 'sfdf',
-      duration: 111,
-      image: 'https://poster.nicefon.ru/2018_03/13/1080x610/2086154521359db595d245.jpg',
-    },
-    {
-      _id: 12,
-      name: 'sfdf',
-      duration: 111,
-      image: 'https://poster.nicefon.ru/2018_03/13/1080x610/2086154521359db595d245.jpg',
-    },
-  ] 
+  React.useEffect(() => { // обновление сохраненных фильмов
+    props.getMovies();
+  }, []); 
+
+  const movies = props.searchHappened ? props.filteredMovies : props.savedCards;
+  
+  const error = false;
 
   return (
     <main>
-      <SearchForm />
-      <MoviesCardList cards={cards} disabledBtn={disabledBtn} deleteFilmBtn={deleteFilmBtn} />
+      <SearchForm 
+        onShorts={props.onShorts}
+        onMovieSearch={props.onSavedMovieSearch}
+        movieInput={props.movieInput}
+        setMovieInput={props.setMovieInput}
+      />
+      <MoviesCardList 
+        deleteBtn={true}
+        filteredMovies={movies} 
+        savedCards={props.savedCards} 
+        getMovies={props.getMovies}
+        onNothingFound={props.onNothingFound}
+        onError={error}
+      />
     </main>
   )
 }
