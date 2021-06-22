@@ -16,7 +16,7 @@ movies. Possibility for users to sign up and in and edit profiles. Searching for
 React, Node.js (Express.js), MongoDB, CSS3, Git.
 
 #### URL
-http://movies.willarion.students.nomoredomains.monster/
+http://movies.willarion.students.nomoredomains.monster/  (url currently not working)
 
     "install": npm i
     "start": npm run start
